@@ -2,30 +2,16 @@ package com.kjl.liquidgalaxyopendata;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
+import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -52,13 +38,76 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setupActionBar();
         setContentView(R.layout.settings);
-        final ListView listview = (ListView) findViewById(R.id.datasourcelist);
-        final ArrayAdapter<String> listAdapter ;
 
+        //DATA SOURCES
+        final ListView dslist = (ListView) findViewById(R.id.datasourcelist);
+        final ArrayAdapter<String> listAdapter ;
         // Create ArrayAdapter using the planet list.
-        listAdapter = new ArrayAdapter<String>(this, R.layout.imagelistlayout);
-        listAdapter.add("test item");
-        listview.setAdapter(listAdapter);
+        listAdapter = new ArrayAdapter<String>(this, R.layout.listlayout);
+        listAdapter.add(getString(R.string.newds));
+        listAdapter.add(getString(R.string.manageds));
+        dslist.setAdapter(listAdapter);
+
+        dslist.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long id)
+            {
+                AlertDialog.Builder adb = new AlertDialog.Builder(
+                        SettingsActivity.this);
+                adb.setTitle("ListView OnClick");
+                adb.setMessage("Selected Item is = " + dslist.getItemAtPosition(position));
+                adb.setPositiveButton("Ok", null);
+                adb.show();
+            }
+        });
+
+
+        //LG
+        final ListView lglist = (ListView) findViewById(R.id.lglist);
+        final ArrayAdapter<String> listAdapter2;
+        // Create ArrayAdapter using the planet list.
+        listAdapter2 = new ArrayAdapter<String>(this, R.layout.listlayout);
+        listAdapter2.add(getString(R.string.connect));
+        lglist.setAdapter(listAdapter2);
+
+        lglist.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long id)
+            {
+                AlertDialog.Builder adb = new AlertDialog.Builder(
+                        SettingsActivity.this);
+                adb.setTitle("ListView OnClick");
+                adb.setMessage("Selected Item is = " + lglist.getItemAtPosition(position));
+                adb.setPositiveButton("Ok", null);
+                adb.show();
+            }
+        });
+
+
+
+        //SECURITY
+        final ListView pwdlist = (ListView) findViewById(R.id.pwdlist);
+        final ArrayAdapter<String> listAdapter3;
+        // Create ArrayAdapter using the planet list.
+        listAdapter3 = new ArrayAdapter<String>(this, R.layout.listlayout);
+        listAdapter3.add(getString(R.string.pwd));
+        pwdlist.setAdapter(listAdapter3);
+
+        pwdlist.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long id)
+            {
+                AlertDialog.Builder adb = new AlertDialog.Builder(
+                        SettingsActivity.this);
+                adb.setTitle("ListView OnClick");
+                adb.setMessage("Selected Item is = " + pwdlist.getItemAtPosition(position));
+                adb.setPositiveButton("Ok", null);
+                adb.show();
+            }
+        });
+
+
+
     }
 
     /**

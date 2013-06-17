@@ -5,20 +5,74 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/datasources"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="2dip"
-            android:paddingBottom="2dip"
-            android:paddingLeft="5dip"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/action_settings"/>
 
-    <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/datasourcelist"
-            tools:listitem="@android:layout/simple_list_item_2"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/datasources"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingLeft="5dip"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:text="@string/ds"/>
+
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/datasourcelist"
+                tools:listitem="@android:layout/simple_list_item_2"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                style="?android:attr/listSeparatorTextViewStyle"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/textView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingLeft="5dip"
+                android:text="@string/lg"/>
+
+        <ListView
+                tools:listitem="@android:layout/simple_list_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lglist"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                style="?android:attr/listSeparatorTextViewStyle"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/textView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingLeft="5dip"
+                android:text="@string/security"/>
+
+        <ListView
+                tools:listitem="@android:layout/simple_list_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pwdlist"/>
+    </LinearLayout>
+
 </LinearLayout>

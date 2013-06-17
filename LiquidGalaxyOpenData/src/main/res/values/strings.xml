@@ -3,6 +3,12 @@
 
     <string name="app_name">LiquidGalaxy OpenData</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="ds">Data Sources</string>
+    <string name="newds">Add new data sources.</string>
+    <string name="manageds">Manage data sources.</string>
+    <string name="lg">LG</string>
+    <string name="connect">Connect to a Liquid Galaxy.</string>
+    <string name="security">Security</string>
+    <string name="pwd">Change or Set a password.</string>
 
 </resources>
