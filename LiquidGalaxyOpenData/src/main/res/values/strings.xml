@@ -10,5 +10,21 @@
     <string name="connect">Connect to a Liquid Galaxy.</string>
     <string name="security">Security</string>
     <string name="pwd">Change or Set a password.</string>
+    <string name="title_activity_new_url">newURLActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_newurl">New data source</string>
+    <string name="urlhint">URL</string>
+    <string name="next">Next</string>
+    <string name="Back">Back</string>
+    <string name="error_message_bad_url">Error: Invalid URL!</string>
+    <string name="error_message_file_not_found">Error: File not found!</string>
+    <string name="error_message_general">Error downloading file!</string>
+    <string name="status_text_default">Enter the URL of the file to download.</string>
+    <string name="progress_dialog_title_downloading">Downloading...</string>
+    <string name="progress_dialog_title_connecting">Connecting...</string>
+    <string name="progress_dialog_message_prefix_downloading">Downloading file</string>
+    <string name="progress_dialog_message_prefix_connecting">Connecting to</string>
+    <string name="user_message_download_complete">Download complete!</string>
+    <string name="user_message_download_canceled">Download canceled!</string>
 
 </resources>
