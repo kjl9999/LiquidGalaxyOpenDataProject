@@ -14,4 +14,13 @@
             android:id="@+id/scrollView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textView"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            android:singleLine="false"
+            android:layout_alignRight="@+id/scrollView"/>
 </RelativeLayout>

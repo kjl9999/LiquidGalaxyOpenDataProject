@@ -74,10 +74,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="38" selection-start="818" selection-end="914" vertical-scroll-proportion="0.0" vertical-offset="61" max-vertical-offset="765">
+            <state line="37" column="0" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.21656051" vertical-offset="68" max-vertical-offset="1054">
               <folding />
             </state>
           </provider>
@@ -86,19 +86,8 @@
       <file leaf-file-name="SettingsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="32" selection-start="1411" selection-end="1411" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2261">
-              <folding>
-                <element signature="e#1066#1091#0" expanded="true" />
-                <element signature="e#1118#1146#0" expanded="true" />
-                <element signature="e#1228#2015#0" expanded="true" />
-                <element signature="e#2004#2005#0" expanded="true" />
-                <element signature="e#2307#2334#0" expanded="true" />
-                <element signature="e#2417#2926#0" expanded="true" />
-                <element signature="e#2915#2916#0" expanded="true" />
-                <element signature="e#3227#3250#0" expanded="true" />
-                <element signature="e#3335#3845#0" expanded="true" />
-                <element signature="e#3834#3835#0" expanded="true" />
-              </folding>
+            <state line="40" column="32" selection-start="1411" selection-end="1411" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="2465">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,29 +95,20 @@
       <file leaf-file-name="newurl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/newurl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="171" column="55" selection-start="7078" selection-end="7086" vertical-scroll-proportion="0.0" vertical-offset="3071" max-vertical-offset="4607">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1499#1680#0" expanded="true" />
-                <element signature="e#1669#1670#0" expanded="true" />
-                <element signature="e#1773#2225#0" expanded="true" />
-                <element signature="e#2213#2214#0" expanded="true" />
-                <element signature="e#3519#10881#0" expanded="true" />
-                <element signature="e#10874#10875#0" expanded="true" />
-                <element signature="method#dismissCurrentProgressDialog#0;class#newurl#0" expanded="false" />
-                <element signature="method#displayMessage#0;class#newurl#0" expanded="false" />
-              </folding>
+            <state line="63" column="33" selection-start="2237" selection-end="2360" vertical-scroll-proportion="0.0" vertical-offset="1054" max-vertical-offset="4947">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DownloaderThread.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/DownloaderThread.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="13" selection-start="2277" selection-end="2277" vertical-scroll-proportion="0.3398058" vertical-offset="1184" max-vertical-offset="2771">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+      <file leaf-file-name="activity_main.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state line="10" column="4" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="544">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -136,62 +116,18 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="40" selection-start="1541" selection-end="1541" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="918">
-              <folding>
-                <element signature="e#640#658#0" expanded="true" />
-                <element signature="e#814#832#0" expanded="true" />
-                <element signature="e#1176#1209#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newurl.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/newurl.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="42" selection-start="1430" selection-end="1430" vertical-scroll-proportion="-14.96" vertical-offset="153" max-vertical-offset="1496">
-              <folding>
-                <element signature="e#1170#1187#0" expanded="true" />
-                <element signature="e#2938#2952#0" expanded="true" />
-                <element signature="e#3387#3401#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_main.xml">
-          <provider editor-type-id="text-editor">
-            <state line="10" column="4" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+            <state line="34" column="62" selection-start="1351" selection-end="1351" vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="918">
               <folding />
             </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="77" selection-start="1615" selection-end="1615" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+            <state line="19" column="46" selection-start="913" selection-end="941" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="612">
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/settings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="8" selection-start="48" selection-end="48" vertical-scroll-proportion="0.08" vertical-offset="36" max-vertical-offset="1445">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -236,18 +172,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/menu/main.xml" />
-        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/imagelistlayout.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/settings.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/newurl.xml" />
-        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/DownloaderThread.java" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/DownloaderThread.java" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/newurl.java" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/Placemark.java" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/NavigationDataSet.java" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/NavigationSaxHandler.java" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -302,7 +241,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -446,6 +384,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -455,7 +394,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="appearance" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="c16075d0426066f" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="006916bd8b092cc8" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus4" />
@@ -618,10 +557,9 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32882884" sideWeight="0.8821918" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11780822" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -632,11 +570,12 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20656371" sideWeight="0.8821918" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11780822" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16666667" sideWeight="0.6808219" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31917807" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19111969" sideWeight="0.8821918" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -703,46 +642,19 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/build/source/r/debug/com/kjl/liquidgalaxyopendata/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="32" selection-start="544" selection-end="544" vertical-scroll-proportion="0.33257404" vertical-offset="58" max-vertical-offset="850" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/drawable-hdpi/settings.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="26" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="44" selection-start="186" selection-end="186" vertical-scroll-proportion="0.109913796" vertical-offset="0" max-vertical-offset="464">
-          <folding />
-        </state>
+        <state line="3" column="44" selection-start="186" selection-end="186" vertical-scroll-proportion="0.109913796" vertical-offset="0" max-vertical-offset="464" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/listlayout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="13" selection-start="283" selection-end="283" vertical-scroll-proportion="0.15022092" vertical-offset="0" max-vertical-offset="679">
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/build/res/all/debug/layout/settings.xml">
@@ -750,106 +662,83 @@
         <state line="7" column="0" selection-start="321" selection-end="321" vertical-scroll-proportion="0.27107063" vertical-offset="0" max-vertical-offset="1411" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="38" selection-start="818" selection-end="914" vertical-scroll-proportion="0.0" vertical-offset="61" max-vertical-offset="765">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor">
-        <state line="10" column="4" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="32" selection-start="1411" selection-end="1411" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2261">
-          <folding>
-            <element signature="e#1066#1091#0" expanded="true" />
-            <element signature="e#1118#1146#0" expanded="true" />
-            <element signature="e#1228#2015#0" expanded="true" />
-            <element signature="e#2004#2005#0" expanded="true" />
-            <element signature="e#2307#2334#0" expanded="true" />
-            <element signature="e#2417#2926#0" expanded="true" />
-            <element signature="e#2915#2916#0" expanded="true" />
-            <element signature="e#3227#3250#0" expanded="true" />
-            <element signature="e#3335#3845#0" expanded="true" />
-            <element signature="e#3834#3835#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="8" selection-start="48" selection-end="48" vertical-scroll-proportion="0.08" vertical-offset="36" max-vertical-offset="1445">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="40" selection-start="1541" selection-end="1541" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="918">
-          <folding>
-            <element signature="e#640#658#0" expanded="true" />
-            <element signature="e#814#832#0" expanded="true" />
-            <element signature="e#1176#1209#0" expanded="true" />
-          </folding>
+        <state line="2" column="8" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="1445">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/newurl.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="42" selection-start="1430" selection-end="1430" vertical-scroll-proportion="-14.96" vertical-offset="153" max-vertical-offset="1496">
-          <folding>
-            <element signature="e#1170#1187#0" expanded="true" />
-            <element signature="e#2938#2952#0" expanded="true" />
-            <element signature="e#3387#3401#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="77" selection-start="1615" selection-end="1615" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+        <state line="31" column="42" selection-start="1430" selection-end="1430" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/DownloaderThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="82" selection-start="3135" selection-end="3135" vertical-scroll-proportion="-15.36" vertical-offset="1452" max-vertical-offset="2992">
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#4943#5006#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/org/xml/sax/XMLReader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="44" selection-start="1232" selection-end="1232" vertical-scroll-proportion="0.8252427" vertical-offset="0" max-vertical-offset="663" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="10" column="4" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/newurl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="55" selection-start="7078" selection-end="7086" vertical-scroll-proportion="0.0" vertical-offset="3071" max-vertical-offset="4607">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1499#1680#0" expanded="true" />
-            <element signature="e#1669#1670#0" expanded="true" />
-            <element signature="e#1773#2225#0" expanded="true" />
-            <element signature="e#2213#2214#0" expanded="true" />
-            <element signature="e#3519#10881#0" expanded="true" />
-            <element signature="e#10874#10875#0" expanded="true" />
-            <element signature="method#dismissCurrentProgressDialog#0;class#newurl#0" expanded="false" />
-            <element signature="method#displayMessage#0;class#newurl#0" expanded="false" />
-          </folding>
+        <state line="63" column="33" selection-start="2237" selection-end="2360" vertical-scroll-proportion="0.0" vertical-offset="1054" max-vertical-offset="4947">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/DownloaderThread.java">
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="13" selection-start="2277" selection-end="2277" vertical-scroll-proportion="0.3398058" vertical-offset="1184" max-vertical-offset="2771">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="19" column="46" selection-start="913" selection-end="941" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="62" selection-start="1351" selection-end="1351" vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="918">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="32" selection-start="1411" selection-end="1411" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2261">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.21656051" vertical-offset="68" max-vertical-offset="1054">
+          <folding />
         </state>
       </provider>
     </entry>

@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 public class newurl extends Activity {
 
-//DOWNLOAD CODE
     // Used to communicate state changes in the DownloaderThread
     public static final int MESSAGE_DOWNLOAD_STARTED = 1000;
     public static final int MESSAGE_DOWNLOAD_COMPLETE = 1001;
@@ -30,12 +29,6 @@ public class newurl extends Activity {
     private newurl thisActivity;
     private Thread downloaderThread;
     private ProgressDialog progressDialog;
-//DOWNLOAD CODE
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +36,9 @@ public class newurl extends Activity {
         setupActionBar();
         setContentView(R.layout.newurl);
 
-    //DOWNLOAD CODRE
         thisActivity = this;
         downloaderThread = null;
         progressDialog = null;
-    //DOWNLOAD CODE
 
         Button back= (Button) findViewById(R.id.BtnBack);
         back.setOnClickListener(new View.OnClickListener() {
@@ -56,20 +47,37 @@ public class newurl extends Activity {
                 NavUtils.navigateUpFromSameTask(newurl.this);
             }
         });
+
         Button next= (Button) findViewById(R.id.BtnNext);
         next.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
-            //DOWNLOAD CODE
                 EditText urlInputField = (EditText) findViewById(R.id.url_input);
                 String urlInput = urlInputField.getText().toString();
-                downloaderThread = new DownloaderThread(thisActivity, urlInput);
-                downloaderThread.start();
-            //DOWNLOAD CODE
-            }
+                String ext = getFileExtension(urlInput);
 
+                if(ext.equalsIgnoreCase("kml")){
+                    downloaderThread = new DownloaderThread(thisActivity, urlInput);
+                    downloaderThread.start();
+                }
+                else if(ext=="csv"){
+                    Toast.makeText(getApplicationContext(), "CSV parsing not implemented yet.", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "This file extension is not supported.", Toast.LENGTH_LONG).show();
+                }
+            }
         });
+    }
+
+    private String getFileExtension(String urlInput) {
+        String extension = "";
+
+        int i = urlInput.lastIndexOf('.');
+        if (i > 0) {
+            extension = urlInput.substring(i+1);
+        }
+        return extension;
     }
 
     /**

@@ -91,9 +91,22 @@ public class DownloaderThread extends Thread
                     fileSizeInKB, 0, fileName);
             parentActivity.activityHandler.sendMessage(msg);
 
+            //////
+            File direct = new File(Environment.getExternalStorageDirectory() + "/LGOD");
+
+            if(!direct.exists())
+            {
+                if(direct.mkdir())
+                {
+                    //directory is created;
+                }
+
+            }
+            ///////
+
             // start download
             inStream = new BufferedInputStream(conn.getInputStream());
-            outFile = new File(Environment.getExternalStorageDirectory() + "/" + fileName);
+            outFile = new File(Environment.getExternalStorageDirectory() + "/LGOD/" + fileName);
             fileStream = new FileOutputStream(outFile);
             outStream = new BufferedOutputStream(fileStream, DOWNLOAD_BUFFER_SIZE);
             byte[] data = new byte[DOWNLOAD_BUFFER_SIZE];
