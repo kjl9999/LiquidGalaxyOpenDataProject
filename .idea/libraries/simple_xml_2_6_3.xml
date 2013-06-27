@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="simple-xml-2.6.3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/SimpleKML/libs/simple-xml-2.6.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/LiquidGalaxyOpenData/libs/simple-xml-2.6.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

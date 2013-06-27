@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LiquidGalaxyOpenData/LiquidGalaxyOpenData.iml" filepath="$PROJECT_DIR$/LiquidGalaxyOpenData/LiquidGalaxyOpenData.iml" />
       <module fileurl="file://$PROJECT_DIR$/LiquidGalaxyOpenDataProject.iml" filepath="$PROJECT_DIR$/LiquidGalaxyOpenDataProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/SimpleKML/SimpleKML.iml" filepath="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/SimpleKML/SimpleKML.iml" />
     </modules>
   </component>
 </project>

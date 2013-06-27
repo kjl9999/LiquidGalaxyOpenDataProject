@@ -1,41 +1,79 @@
 package com.kjl.liquidgalaxyopendata;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ScrollView;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.xml.sax.*;
+import com.ekito.simpleKML.model.Kml;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 public class MainActivity extends Activity {
+
+    private final String TAG = "MainActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final TextView maintext = (TextView) findViewById(R.id.textView);
+        Button button= (Button) findViewById(R.id.refresh);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //File kmlfile=new File( Environment.getExternalStorageDirectory() + "/LGOD/parades_bus.kml");
+                //String kmlfilepath=kmlfile.getAbsolutePath();
+                //new ParsingTask().execute(kmlfilepath);
+
+                com.ekito.simpleKML.Serializer kmlSerializer;
+                kmlSerializer = new com.ekito.simpleKML.Serializer();
+                Log.d(TAG, "read started");
+                // this will create a Kml class based on the informations described in params[0] (assets/test.kml)
+                Kml kml = null;
+                try {
+                    InputStream is = new FileInputStream(new File( Environment.getExternalStorageDirectory() + "/LGOD/parades_bus.kml"));
+                    Log.d(TAG, "parsing started");
+                    kml = kmlSerializer.read(is);
+                    Log.d(TAG, "parsing done");
+
+                } catch (IOException e) {
+                    Log.e(TAG, e.getMessage());
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+                Log.d(TAG, "read done");
+
+                if (kml != null) {
+                    Log.d(TAG, "write started");
+                    // this will output the KML to /data/data/com.ekito.simplekmldemo/example_out.kml
+                    File out = new File(getDir("assets", Context.MODE_PRIVATE), "test.kml");
+                    try {
+                        kmlSerializer.write(kml, out);
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+                    Log.d(TAG, "write done");
+                }
+                maintext.append(kml.getFeature().getName() + "\n" + kml.getFeature().getDescription() + "\n" + kml.getFeature().getAddress());
+
+            }
+        });
+
+
+        TextView tv = (TextView)findViewById(R.id.textView);
 
     }
 
@@ -64,20 +102,6 @@ public class MainActivity extends Activity {
 
         return true;
     }
-
-    public static String readFileAsString(String filePath) throws java.io.IOException
-    {
-        File cardPath = Environment.getExternalStorageDirectory();
-        BufferedReader r = new BufferedReader(new FileReader(cardPath + filePath));
-        StringBuilder total = new StringBuilder();
-        String line;
-        while((line = r.readLine()) != null) {
-            total.append(line);
-        }
-
-        return total.toString();
-    }
-
 
 
 }
