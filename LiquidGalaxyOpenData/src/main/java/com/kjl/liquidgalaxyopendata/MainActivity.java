@@ -1,23 +1,31 @@
 package com.kjl.liquidgalaxyopendata;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.ekito.simpleKML.model.Kml;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.net.URLConnection;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
+import android.util.Log;
 
 public class MainActivity extends Activity {
 
@@ -38,36 +46,48 @@ public class MainActivity extends Activity {
                 //String kmlfilepath=kmlfile.getAbsolutePath();
                 //new ParsingTask().execute(kmlfilepath);
 
-                com.ekito.simpleKML.Serializer kmlSerializer;
-                kmlSerializer = new com.ekito.simpleKML.Serializer();
-                Log.d(TAG, "read started");
-                // this will create a Kml class based on the informations described in params[0] (assets/test.kml)
-                Kml kml = null;
-                try {
-                    InputStream is = new FileInputStream(new File( Environment.getExternalStorageDirectory() + "/LGOD/parades_bus.kml"));
-                    Log.d(TAG, "parsing started");
-                    kml = kmlSerializer.read(is);
-                    Log.d(TAG, "parsing done");
+                NavigationDataSet navigationDataSet = null;
+                try
+                {
+                /* Get a SAXParser from the SAXPArserFactory. */
+                    SAXParserFactory spf = SAXParserFactory.newInstance();
+                    SAXParser sp = spf.newSAXParser();
 
-                } catch (IOException e) {
-                    Log.e(TAG, e.getMessage());
+                /* Get the XMLReader of the SAXParser we created. */
+                    XMLReader xr = sp.getXMLReader();
+
+                /* Create a new ContentHandler and apply it to the XML-Reader*/
+                    NavigationSaxHandler navSax2Handler = new NavigationSaxHandler();
+                    xr.setContentHandler(navSax2Handler);
+
+                /* Parse the xml-data from our URL. */
+                    File kmlfile=new File( Environment.getExternalStorageDirectory() + "/LGOD/parades_bus.kml");
+                    InputStream inputStream= new FileInputStream(kmlfile);
+                    Reader reader = new InputStreamReader(inputStream,"UTF-8");
+
+                    InputSource is = new InputSource(reader);
+                    //is.setEncoding("UTF-8");
+
+                    xr.parse(is);
+
+                /* Our NavigationSaxHandler now provides the parsed data to us. */
+                    navigationDataSet = navSax2Handler.getParsedData();
+
+                /* Set the result to be displayed in our GUI. */
+                    //Log.d(myapp.APP,"navigationDataSet: "+navigationDataSet.toString());
+
                 } catch (Exception e) {
-                    Log.e(TAG, e.getMessage());
+                    // Log.e(myapp.APP, "error with kml xml", e);
+                    navigationDataSet = null;
                 }
-                Log.d(TAG, "read done");
 
-                if (kml != null) {
-                    Log.d(TAG, "write started");
-                    // this will output the KML to /data/data/com.ekito.simplekmldemo/example_out.kml
-                    File out = new File(getDir("assets", Context.MODE_PRIVATE), "test.kml");
-                    try {
-                        kmlSerializer.write(kml, out);
-                    } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
-                    }
-                    Log.d(TAG, "write done");
-                }
-                maintext.append(kml.getFeature().getName() + "\n" + kml.getFeature().getDescription() + "\n" + kml.getFeature().getAddress());
+                //return navigationDataSet;
+                TextView tv = (TextView)findViewById(R.id.textView);
+                /*tv.append(navigationDataSet.getPlacemarks().get(1).getTitle());
+                tv.append(navigationDataSet.getPlacemarks().get(1).getDescription());
+                tv.append(navigationDataSet.getPlacemarks().get(2).getTitle());*/
+
+                tv.append(navigationDataSet.toString());
 
             }
         });
