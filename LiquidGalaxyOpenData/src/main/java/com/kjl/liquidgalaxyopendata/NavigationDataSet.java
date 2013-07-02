@@ -17,7 +17,7 @@ public class NavigationDataSet {
         String s= "";
         for (Iterator<Placemark> iter=placemarks.iterator();iter.hasNext();) {
             Placemark p = (Placemark)iter.next();
-            s += p.getTitle() + "\n" + p.getDescription() + "\n" + p.getCoordinates() +"\n\n";
+            s += p.getTitle() + "\n" + p.getCoordinates() +"\n\n";
         }
         return s;
     }
