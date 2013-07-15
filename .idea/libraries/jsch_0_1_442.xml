@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jsch-0.1.44">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/LiquidGalaxyOpenData/libs/jsch-0.1.44.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

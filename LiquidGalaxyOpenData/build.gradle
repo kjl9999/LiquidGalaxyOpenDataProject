@@ -3,7 +3,7 @@ buildscript {
         maven { url 'http://repo1.maven.org/maven2' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.4'
+        classpath 'com.android.tools.build:gradle:0.5.+'
     }
 }
 apply plugin: 'android'
@@ -11,6 +11,9 @@ apply plugin: 'android'
 dependencies {
     compile files('libs/android-support-v4.jar')
     compile files('libs/simple-xml-2.6.3.jar')
+    compile files('libs/jsch-0.1.44.jar')
+    compile files('libs/jzlib-1.1.1.jar')
+
 }
 
 android {

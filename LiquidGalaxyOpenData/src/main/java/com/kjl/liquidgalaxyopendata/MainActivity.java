@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.service.textservice.SpellCheckerService;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,6 +24,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Properties;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -30,6 +33,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import android.util.Log;
+
+import com.jcraft.jsch.*;
 
 public class MainActivity extends Activity {
 
@@ -46,12 +51,92 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAllData();
+                //showAllData();
+                //testing ssh
+/*
+                try {
+                    maintext.append(executeRemoteCommand("lg","lqgalaxy","10.42.42.1",22));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    maintext.append("exeption: "+e.getMessage());
+                }
+*/
+                //end testing ssh
+
+                //test generate key
+                generateKeys();
+                //end test
             }
         });
         TextView tv = (TextView)findViewById(R.id.textView);
     }
 
+    public static String executeRemoteCommand(
+            String username,
+            String password,
+            String hostname,
+            int port) throws Exception {
+
+        JSch jsch = new JSch();
+        Session session = jsch.getSession(username, hostname, 22);
+        session.setPassword(password);
+
+        // Avoid asking for key confirmation
+        Properties prop = new Properties();
+        prop.put("StrictHostKeyChecking", "no");
+        session.setConfig(prop);
+
+        session.connect();
+
+        // SSH Channel
+        ChannelExec channelssh = (ChannelExec)
+                session.openChannel("exec");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        channelssh.setOutputStream(baos);
+
+        // Execute command
+        channelssh.setCommand("ls");
+        channelssh.connect();
+        channelssh.disconnect();
+
+        return baos.toString();
+    }
+
+public void generateKeys(){
+
+    TextView tv = (TextView)findViewById(R.id.textView);
+
+    String _type="rsa";
+    int type=0;
+    if(_type.equals("rsa")){type=KeyPair.RSA;}
+    else if(_type.equals("dsa")){type=KeyPair.DSA;}
+    else {
+        System.err.println(
+                "usage: java KeyGen rsa output_keyfile comment\n"+
+                        "       java KeyGen dsa  output_keyfile comment");
+        System.exit(-1);
+    }
+    String filename=Environment.getExternalStorageDirectory()+"/LGOD/sshkey";   ///////////////////////
+    String comment="";                                                          //what is that comment?
+                                                                                ///////////////////////
+    JSch jsch=new JSch();
+
+    String passphrase="";
+
+    try{
+        KeyPair kpair=KeyPair.genKeyPair(jsch, type);
+        kpair.setPassphrase(passphrase);
+        kpair.writePrivateKey(filename);
+        kpair.writePublicKey(filename+".pub", comment);
+        System.out.println("Finger print: "+kpair.getFingerPrint());
+                tv.append("Finger print: "+kpair.getFingerPrint());
+        kpair.dispose();
+    }
+    catch(Exception e){
+        System.out.println(e);
+        tv.append("exeption: "+e.getMessage());
+    }
+}
     public void showAllData(){
         //for each file in /LGOD/ do getDataset and append to a expandable list
         File dir = new File(Environment.getExternalStorageDirectory()+"/LGOD/");
