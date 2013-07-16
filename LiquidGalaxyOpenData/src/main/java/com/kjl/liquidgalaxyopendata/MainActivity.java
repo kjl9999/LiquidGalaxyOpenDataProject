@@ -53,18 +53,30 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 //showAllData();
                 //testing ssh
-/*
+
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            executeRemoteCommand("lg", "lqgalaxy", "10.42.42.1", 22);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            TextView tv1 = (TextView) findViewById(R.id.textView);
+                            tv1.append("exeption: "+e.getMessage()); //here the app would crash since can't print from the thread
+                        }
+                    }
+                }).start();
+                /*
                 try {
                     maintext.append(executeRemoteCommand("lg","lqgalaxy","10.42.42.1",22));
                 } catch (Exception e) {
                     e.printStackTrace();
                     maintext.append("exeption: "+e.getMessage());
-                }
-*/
+                }*/
+
                 //end testing ssh
 
                 //test generate key
-                generateKeys();
+                //generateKeys();
                 //end test
             }
         });
@@ -78,8 +90,12 @@ public class MainActivity extends Activity {
             int port) throws Exception {
 
         JSch jsch = new JSch();
+        String privateKey = Environment.getExternalStorageDirectory()+"/LGOD/lg-id_rsa";
+        jsch.addIdentity(privateKey);
+
         Session session = jsch.getSession(username, hostname, 22);
         session.setPassword(password);
+
 
         // Avoid asking for key confirmation
         Properties prop = new Properties();
@@ -95,7 +111,7 @@ public class MainActivity extends Activity {
         channelssh.setOutputStream(baos);
 
         // Execute command
-        channelssh.setCommand("ls");
+        channelssh.setCommand("touch /home/lg/asdasd");
         channelssh.connect();
         channelssh.disconnect();
 
@@ -116,16 +132,18 @@ public void generateKeys(){
                         "       java KeyGen dsa  output_keyfile comment");
         System.exit(-1);
     }
-    String filename=Environment.getExternalStorageDirectory()+"/LGOD/sshkey";   ///////////////////////
-    String comment="";                                                          //what is that comment?
+    String filename=Environment.getExternalStorageDirectory()+"/LGOD/lg-id_rsa";   ///////////////////////
+    String comment="Liquid Galaxy";                                                          //what is that comment?
                                                                                 ///////////////////////
     JSch jsch=new JSch();
+
 
     String passphrase="";
 
     try{
-        KeyPair kpair=KeyPair.genKeyPair(jsch, type);
+        KeyPair kpair=KeyPair.genKeyPair(jsch, type,4096);
         kpair.setPassphrase(passphrase);
+
         kpair.writePrivateKey(filename);
         kpair.writePublicKey(filename+".pub", comment);
         System.out.println("Finger print: "+kpair.getFingerPrint());
