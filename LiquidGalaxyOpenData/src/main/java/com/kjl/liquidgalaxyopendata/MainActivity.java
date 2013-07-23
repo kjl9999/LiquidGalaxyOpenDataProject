@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -51,9 +52,31 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //showAllData();
-                //testing ssh
 
+                csv csvFile = new csv();
+                csvFile.setCsvReader("allotjaments_hostaleria_federacio.csv");
+
+                //gets the first row so users can select fields
+                ArrayList<String> line=csvFile.getLine(0);
+
+                //gets the placemarks using the selected rows
+                ArrayList<Placemark> CSVplacemarks = csvFile.readCSV(3,4,10,11);
+                maintext.append(CSVplacemarks.get(0).getTitle()+", ");
+                maintext.append(CSVplacemarks.get(0).getDescription()+", ");
+                maintext.append(CSVplacemarks.get(0).getCoordinates()+"\n");
+
+                maintext.append(CSVplacemarks.get(1).getTitle()+", ");
+                maintext.append(CSVplacemarks.get(1).getDescription()+", ");
+                maintext.append(CSVplacemarks.get(1).getCoordinates()+"\n");
+
+                maintext.append(CSVplacemarks.get(2).getTitle()+", ");
+                maintext.append(CSVplacemarks.get(2).getDescription()+", ");
+                maintext.append(CSVplacemarks.get(2).getCoordinates()+"\n");
+
+
+                //showAllData();
+                /*
+                //testing ssh
                 new Thread(new Runnable() {
                     public void run() {
                         try {
@@ -65,16 +88,10 @@ public class MainActivity extends Activity {
                         }
                     }
                 }).start();
-                /*
-                try {
-                    maintext.append(executeRemoteCommand("lg","lqgalaxy","10.42.42.1",22));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    maintext.append("exeption: "+e.getMessage());
-                }*/
-
                 //end testing ssh
+                */
 
+                //generating keys is no longer used
                 //test generate key
                 //generateKeys();
                 //end test
@@ -83,39 +100,25 @@ public class MainActivity extends Activity {
         TextView tv = (TextView)findViewById(R.id.textView);
     }
 
-    public static String executeRemoteCommand(
+    public String executeRemoteCommand(
             String username,
             String password,
             String hostname,
             int port) throws Exception {
 
-        JSch jsch = new JSch();
-        String privateKey = Environment.getExternalStorageDirectory()+"/LGOD/lg-id_rsa";
-        jsch.addIdentity(privateKey);
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    executeRemoteCommand("lg", "lqgalaxy", "10.42.42.1", 22);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    TextView tv1 = (TextView) findViewById(R.id.textView);
+                    tv1.append("exeption: "+e.getMessage()); //here the app would crash since can't print from the thread
+                }
+            }
+        }).start();
 
-        Session session = jsch.getSession(username, hostname, 22);
-        session.setPassword(password);
-
-
-        // Avoid asking for key confirmation
-        Properties prop = new Properties();
-        prop.put("StrictHostKeyChecking", "no");
-        session.setConfig(prop);
-
-        session.connect();
-
-        // SSH Channel
-        ChannelExec channelssh = (ChannelExec)
-                session.openChannel("exec");
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        channelssh.setOutputStream(baos);
-
-        // Execute command
-        channelssh.setCommand("touch /home/lg/asdasd");
-        channelssh.connect();
-        channelssh.disconnect();
-
-        return baos.toString();
+        return "exeption";
     }
 
 public void generateKeys(){
@@ -163,6 +166,8 @@ public void generateKeys(){
             NavigationDataSet kmldata;
 
             for (File child : dir.listFiles()) {
+               //check if file is a kml
+               // if(getFileExtension(child.getName())=="kml")
                 kmldata=getDataset(child);
                 test.append(child.getName()+"--------------\n------------\n\n"+kmldata.toString()+"\n\n"); //this is a test
 
@@ -171,6 +176,15 @@ public void generateKeys(){
         }
 
     }
+private String getFileExtension(String urlInput) {
+    String extension = "";
+
+    int i = urlInput.lastIndexOf('.');
+    if (i > 0) {
+        extension = urlInput.substring(i+1);
+    }
+    return extension;
+}
 
     public NavigationDataSet getDataset(File kmlfile){
         //returns a NavigationDataSet containing all the placemarks from the given kml file
