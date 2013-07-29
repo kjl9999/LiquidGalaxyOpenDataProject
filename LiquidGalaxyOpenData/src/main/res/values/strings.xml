@@ -25,6 +25,24 @@
     <string name="progress_dialog_message_prefix_downloading">Downloading file</string>
     <string name="progress_dialog_message_prefix_connecting">Connecting to</string>
     <string name="user_message_download_complete">Download complete!</string>
-    <string name="user_message_download_canceled">Download canceled!</string>
+    <string name="user_message_download_canceled">Download canceled!</string><string name="csvhint">CSV</string>
+    <string name="csvmappingname">Select your document\'s column that represents the points name.</string>
+    <string name="name">Name</string>
+    <string name="csvmappingdesc">Select your document\'s column that represents the points description.</string>
+    <string name="desc">Description</string>
+    <string name="csvmappingcoords">Select your document\'s column that represents the coordinates.</string>
+    <string name="coords">Coordinates</string>
+    <string name="csvmappingquestion">How are the coordinates represented on your document?</string>
+    <string name="singlecoords">One single field</string>
+    <string name="separatecoords">Separate fields</string>
+    <string name="coordtype">Coordinade representation</string>
+
+    <string name="csvmappingcoordx">Select your document\'s column that represents the X coordinate.</string>
+    <string name="coordx">X coordinate</string>
+    <string name="csvmappingcoordy">Select your document\'s column that represents the Y coordinate.</string>
+    <string name="coordy">Y coordinate</string>
+    <string name="Finish">Finish</string>
+
+
 
 </resources>

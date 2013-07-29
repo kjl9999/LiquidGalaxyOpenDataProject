@@ -1,68 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".newurl">
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:visibility="visible"
-            android:id="@+id/urllayout"
-            android:layout_above="@+id/relativeLayout">
-
-        <TextView
-                style="?android:attr/listSeparatorTextViewStyle"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/textView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="2dip"
-                android:paddingBottom="2dip"
-                android:paddingLeft="5dip"
-                android:text="@string/urlhint"
-                android:layout_marginTop="@dimen/activity_vertical_margin"/>
-
-        <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/url_input"
-                android:inputType="textUri"/>
-
-        <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/scrollView2">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/finaltv"
-                    android:visibility="gone"/>
-        </ScrollView>
-
-    </LinearLayout>
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context=".newurl">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:id="@+id/mappinglayout"
-            android:visibility="gone"
             android:layout_above="@+id/relativeLayout">
 
         <TextView
                 style="?android:attr/listSeparatorTextViewStyle"
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/textView2"
+                android:id="@+id/textView"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dip"
@@ -95,13 +51,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/title"
-                            android:text="@string/name"/>
+                            android:text="@string/name"
+                            />
 
                     <RadioGroup
                             android:id="@+id/radioName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-4dp"/>
+                            android:layout_marginTop="-4dp">
+
+                    </RadioGroup>
 
                     <RadioGroup
                             android:id="@+id/radioCoords"
@@ -110,9 +69,11 @@
                             android:layout_marginTop="-4dp"
                             android:visibility="gone"
                             android:focusableInTouchMode="false"/>
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 
     <RelativeLayout
@@ -150,7 +111,7 @@
                 android:text="@string/Back"
                 android:layout_alignParentBottom="true"/>
         <Button
-                android:id="@+id/BtnNext"
+                android:id="@+id/BtnNextlayout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"

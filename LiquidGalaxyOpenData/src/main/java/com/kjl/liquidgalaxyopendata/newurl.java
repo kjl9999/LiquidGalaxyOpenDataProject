@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.MenuItem;
@@ -13,7 +14,14 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class newurl extends Activity {
 
@@ -29,6 +37,13 @@ public class newurl extends Activity {
     private newurl thisActivity;
     private Thread downloaderThread;
     private ProgressDialog progressDialog;
+    private int step; //0=name 1=description 2=coordType 3=coords/coordX 4=coordY 10=Finish
+    int[] positions = new int[4]; //0=name 1=description 2=coords/coordX 3=coordY
+    int coordmode = 0; //0=coords 1=coordX 2=coordY
+    csv csvFile = new csv();
+    private ArrayList<Placemark> placemarks;
+    Button next;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +54,11 @@ public class newurl extends Activity {
         thisActivity = this;
         downloaderThread = null;
         progressDialog = null;
+        step=0;
+
+
+        EditText urlInputField = (EditText) findViewById(R.id.url_input);
+        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/hostaleria.csv");
 
         Button back= (Button) findViewById(R.id.BtnBack);
         back.setOnClickListener(new View.OnClickListener() {
@@ -48,10 +68,11 @@ public class newurl extends Activity {
             }
         });
 
-        Button next= (Button) findViewById(R.id.BtnNext);
+        next= (Button) findViewById(R.id.BtnNext);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                Toast.makeText(getApplicationContext(),"step: "+String.valueOf(step),Toast.LENGTH_LONG);
                 EditText urlInputField = (EditText) findViewById(R.id.url_input);
                 String urlInput = urlInputField.getText().toString();
                 String ext = getFileExtension(urlInput);
@@ -60,14 +81,162 @@ public class newurl extends Activity {
                     downloaderThread = new DownloaderThread(thisActivity, urlInput);
                     downloaderThread.start();
                 }
-                else if(ext=="csv"){
-                    Toast.makeText(getApplicationContext(), "CSV parsing not implemented yet.", Toast.LENGTH_LONG).show();
+                else if(ext.equalsIgnoreCase("csv")){
+
+
+                    RadioGroup rg = (RadioGroup) findViewById(R.id.radioName);
+                    RadioGroup rgCoords = (RadioGroup) findViewById(R.id.radioCoords);
+                    TextView desc = (TextView) findViewById(R.id.description);
+                    TextView tilte = (TextView) findViewById(R.id.title);
+
+                    //read csv document and name mapping
+                    if(step==0){
+
+                        //creates a thread that downloads the file
+                        //the main thread waits with .join()
+                        downloaderThread = new DownloaderThread(thisActivity, urlInput);
+                        downloaderThread.start();
+                        try {
+                            downloaderThread.join();            //thread.join() waits untill the file is downloaded, fut freezes the screen, need to find a better way.
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        csvFile.setCsvReader(getNewestFileInDirectory().getName());
+                        //gets the first row from csv so users can select fields
+                        ArrayList<String> line=csvFile.getLine(0);
+
+                        LinearLayout urllayout = (LinearLayout) findViewById(R.id.urllayout);
+                        LinearLayout mappinglayout = (LinearLayout) findViewById(R.id.mappinglayout);
+                        urllayout.setVisibility(View.GONE);
+                        mappinglayout.setVisibility(View.VISIBLE);
+
+                        final RadioButton[] rb = new RadioButton[line.size()];
+                        rg= (RadioGroup) findViewById(R.id.radioName);
+
+                        for(int i=0; i<line.size(); i++){
+                            rb[i]  = new RadioButton(thisActivity);
+                            rb[i].setText(line.get(i));
+                            rb[i].setId(i);
+                            rg.addView(rb[i]);
+                        }
+                        step=1;
+
+                    }
+                    //description mapping
+                    else if(step==1){
+                        //stores the name position selected in the last step
+                        positions[0]=rg.getCheckedRadioButtonId();
+
+                        desc.setText(R.string.csvmappingdesc);
+                        tilte.setText(R.string.desc);
+                        step=2;
+                    }
+                    //select coord mapping method
+                    else if(step==2){
+                        //stores the description position selected in the last step
+                        positions[1]=rg.getCheckedRadioButtonId();
+
+                        //asks the user how the coords are to be mapped
+                        desc.setText(R.string.csvmappingquestion);
+                        tilte.setText(R.string.coordtype);
+                        rg.setVisibility(View.GONE);
+                        RadioButton rb1  = new RadioButton(thisActivity);
+                        rb1.setText(R.string.singlecoords);
+                        rb1.setId(0);
+                        rgCoords.addView(rb1);
+                        RadioButton rb2  = new RadioButton(thisActivity);
+                        rb2.setText(R.string.separatecoords);
+                        rb2.setId(1);
+                        rgCoords.addView(rb2);
+                        rgCoords.setVisibility(View.VISIBLE);
+                        step=3;
+                    }
+                    //coordinade mapping
+                    else if(step==3){
+                        if(coordmode!=2)coordmode=rgCoords.getCheckedRadioButtonId();
+
+                        rgCoords.setVisibility(View.GONE);
+                        rg.setVisibility(View.VISIBLE);
+                        //one-field coordinades
+                        if(coordmode==0){
+                            desc.setText(R.string.csvmappingcoords);
+                            tilte.setText(R.string.coords);
+                            step=10;
+                            Button finish = (Button) findViewById(R.id.BtnNext);
+                            finish.setText(R.string.Finish);
+                        }
+                        //X coordinate
+                        else if(coordmode==1){
+                            desc.setText(R.string.csvmappingcoordx);
+                            tilte.setText(R.string.coordx);
+                            coordmode=2;
+                        }
+                        else if(coordmode==2){
+                            positions[2]=rg.getCheckedRadioButtonId();
+                            desc.setText(R.string.csvmappingcoordy);
+                            tilte.setText(R.string.coordy);
+                            step=10;
+                            next.setText(R.string.Finish);
+                        }
+
+                    }
+                    //read the csv file and create the kml file
+                    else if (step==10){
+                        LinearLayout urllayout = (LinearLayout) findViewById(R.id.urllayout);
+                        LinearLayout mappinglayout = (LinearLayout) findViewById(R.id.mappinglayout);
+                        urllayout.setVisibility(View.VISIBLE);
+                        mappinglayout.setVisibility(View.GONE);
+
+                        EditText url = (EditText) findViewById(R.id.url_input);
+                        url.setVisibility(View.GONE);
+                        TextView finaltv = (TextView) findViewById(R.id.finaltv);
+                        finaltv.setVisibility(View.VISIBLE);
+                        if(coordmode==0){
+                            placemarks = csvFile.readCSV(positions[0], positions[1], positions[2]);
+                            finaltv.setText("Name: "+String.valueOf(positions[0])+" Description: "+String.valueOf(positions[1])+" Coord: "+String.valueOf(positions[2]));
+                            for(int i=0; i<placemarks.size();i++){
+                                // + check if first line is relevant
+                                finaltv.append("\n"+placemarks.get(i).getTitle()+" "+placemarks.get(i).getDescription()+" "+placemarks.get(i).getCoordinates());
+                            }
+                        }
+                        else {
+                            positions[3]=rg.getCheckedRadioButtonId();
+                            placemarks = csvFile.readCSV(positions[0], positions[1], positions[2], positions[3]);
+                            finaltv.setText("Name: "+String.valueOf(positions[0])+" Description: "+String.valueOf(positions[1])+" Coord x: "+String.valueOf(positions[2])+" Coord y: "+String.valueOf(positions[3]));
+                            for(int i=0; i<placemarks.size();i++){
+                                // + check if first line is relevant
+
+                                finaltv.append("\n\n"+placemarks.get(i).getTitle()+" "+placemarks.get(i).getDescription()+" "+placemarks.get(i).getCoordinates());
+                            }
+                        }
+
+                    }
+
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "This file extension is not supported.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "This file extension is not supported: "+ext, Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+
+    public File getNewestFileInDirectory() {
+        File dir = new File(Environment.getExternalStorageDirectory()+"/LGOD/");
+        File newestFile = null;
+
+        if (dir.isDirectory()){
+            TextView test = (TextView)findViewById(R.id.textView);
+            NavigationDataSet kmldata;
+
+            for (File child : dir.listFiles()) {
+                if (newestFile == null || child.lastModified()>(newestFile.lastModified())) {
+                    newestFile = child;
+                }
+            }
+        }
+        return newestFile;
     }
 
     private String getFileExtension(String urlInput) {
@@ -78,6 +247,16 @@ public class newurl extends Activity {
             extension = urlInput.substring(i+1);
         }
         return extension;
+    }
+
+    private String getFileName(String urlInput) {
+        String name = "";
+
+        int i = urlInput.lastIndexOf('/');
+        if (i > 0) {
+            name = urlInput.substring(i+1);
+        }
+        return name;
     }
 
     /**
