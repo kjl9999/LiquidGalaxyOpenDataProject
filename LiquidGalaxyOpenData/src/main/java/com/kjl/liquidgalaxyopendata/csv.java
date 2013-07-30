@@ -104,7 +104,7 @@ public class csv {
                 currentPlacemark = new Placemark();
                 currentPlacemark.setTitle(strings[namePosition]);
                 currentPlacemark.setDescription(strings[descriptionPosition]);
-                currentPlacemark.setCoordinates(strings[xPosition]+","+strings[yPosition]);
+                currentPlacemark.setCoordinates(strings[xPosition].replace(",",".")+","+strings[yPosition].replace(",","."));
 
                 placemarks.add(currentPlacemark);
             }

@@ -37,10 +37,10 @@
     <string name="separatecoords">Separate fields</string>
     <string name="coordtype">Coordinade representation</string>
 
-    <string name="csvmappingcoordx">Select your document\'s column that represents the X coordinate.</string>
-    <string name="coordx">X coordinate</string>
-    <string name="csvmappingcoordy">Select your document\'s column that represents the Y coordinate.</string>
-    <string name="coordy">Y coordinate</string>
+    <string name="csvmappingcoordx">Select your document\'s column that represents the Longitude.</string>
+    <string name="coordx">Longitude</string>
+    <string name="csvmappingcoordy">Select your document\'s column that represents the Latitude.</string>
+    <string name="coordy">Latitude</string>
     <string name="Finish">Finish</string>
 
 

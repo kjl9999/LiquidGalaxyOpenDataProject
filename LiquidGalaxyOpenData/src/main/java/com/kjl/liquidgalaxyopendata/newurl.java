@@ -20,8 +20,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class newurl extends Activity {
 
@@ -192,24 +196,25 @@ public class newurl extends Activity {
                         url.setVisibility(View.GONE);
                         TextView finaltv = (TextView) findViewById(R.id.finaltv);
                         finaltv.setVisibility(View.VISIBLE);
+
                         if(coordmode==0){
                             placemarks = csvFile.readCSV(positions[0], positions[1], positions[2]);
-                            finaltv.setText("Name: "+String.valueOf(positions[0])+" Description: "+String.valueOf(positions[1])+" Coord: "+String.valueOf(positions[2]));
-                            for(int i=0; i<placemarks.size();i++){
-                                // + check if first line is relevant
-                                finaltv.append("\n"+placemarks.get(i).getTitle()+" "+placemarks.get(i).getDescription()+" "+placemarks.get(i).getCoordinates());
-                            }
+                            //finaltv.setText("Name: "+String.valueOf(positions[0])+" Description: "+String.valueOf(positions[1])+" Coord: "+String.valueOf(positions[2]));
                         }
                         else {
                             positions[3]=rg.getCheckedRadioButtonId();
                             placemarks = csvFile.readCSV(positions[0], positions[1], positions[2], positions[3]);
-                            finaltv.setText("Name: "+String.valueOf(positions[0])+" Description: "+String.valueOf(positions[1])+" Coord x: "+String.valueOf(positions[2])+" Coord y: "+String.valueOf(positions[3]));
-                            for(int i=0; i<placemarks.size();i++){
-                                // + check if first line is relevant
-
-                                finaltv.append("\n\n"+placemarks.get(i).getTitle()+" "+placemarks.get(i).getDescription()+" "+placemarks.get(i).getCoordinates());
-                            }
+                            //finaltv.setText("Name: "+String.valueOf(positions[0])+" Description: "+String.valueOf(positions[1])+" Coord x: "+String.valueOf(positions[2])+" Coord y: "+String.valueOf(positions[3]));
                         }
+                        //printing the data
+                        for(int i=0; i<placemarks.size();i++){
+                            // + check if first line is relevant
+                            finaltv.append("\n"+placemarks.get(i).getTitle()+" "+placemarks.get(i).getDescription()+" "+placemarks.get(i).getCoordinates());
+                        }
+
+                        //writing a kml file
+                        writeKMLFile(placemarks);
+
 
                     }
 
@@ -220,7 +225,62 @@ public class newurl extends Activity {
             }
         });
     }
+    public String getFileNameNoExtension(File file){
+        String name = file.getName();
+        int pos = name.lastIndexOf(".");
+        if (pos > 0) {
+            name = name.substring(0, pos);
+        }
+        return name;
+    }
 
+    public void writeKMLFile(ArrayList<Placemark> placemarks){
+        String kmlFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
+                "<Folder>\n" +
+                "\t<name>" +
+                getNewestFileInDirectory().getName() +
+                "</name>\n" +
+                "<description></description>\n" +
+                getKMLPlacemarcks(placemarks) +
+                "</Folder>\n" +
+                "</kml>\n"
+                ;
+
+        try {
+            File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/"+getFileNameNoExtension(getNewestFileInDirectory())+"_LGOD.kml");
+
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(kmlFile);
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public String getKMLPlacemarcks(ArrayList<Placemark> placemarks){
+        String kmlplacemarks = "";
+        for(int i=1; i<placemarks.size();i++){ //this for ignores the first line, suposed to be titles
+            kmlplacemarks+=
+                    "\t<Placemark>\n" +
+                        "\t\t<name>"+ placemarks.get(i).getTitle() +"</name>\n" +
+                        "\t\t<description>"+ placemarks.get(i).getDescription() +"</description>\n" +
+                        "\t\t<Point>\n" +
+                            "\t\t\t<coordinates>"+ placemarks.get(i).getCoordinates() +"</coordinates>\n" +
+                        "\t\t</Point>\n" +
+                    "\t</Placemark>\n";
+        }
+        return kmlplacemarks;
+    }
 
     public File getNewestFileInDirectory() {
         File dir = new File(Environment.getExternalStorageDirectory()+"/LGOD/");
