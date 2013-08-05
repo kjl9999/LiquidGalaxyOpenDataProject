@@ -20,11 +20,19 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 
 public class newurl extends Activity {
@@ -62,7 +70,9 @@ public class newurl extends Activity {
 
 
         EditText urlInputField = (EditText) findViewById(R.id.url_input);
-        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/hostaleria.csv");
+        //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/hostaleria.csv");
+        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/educacio_primaria.kmz");
+
 
         Button back= (Button) findViewById(R.id.BtnBack);
         back.setOnClickListener(new View.OnClickListener() {
@@ -219,12 +229,152 @@ public class newurl extends Activity {
                     }
 
                 }
+                else if(ext.equalsIgnoreCase("kmz")){
+                    //creates a thread that downloads the file
+                    //the main thread waits with .join()
+                    downloaderThread = new DownloaderThread(thisActivity, urlInput);
+                    downloaderThread.start();
+                    try {
+                        downloaderThread.join();            //thread.join() waits untill the file is downloaded, fut freezes the screen, need to find a better way.
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    File kmzFile = getNewestFileInDirectory();
+
+                    unpackZip(Environment.getExternalStorageDirectory()+"/LGOD/", kmzFile.getName());
+
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "This file extension is not supported: "+ext, Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
+
+    // this function will be used if more coordinate formats are accepted by the app
+    public String convertCoordinates(String coordinates){
+        if (checkDecimalCoords(coordinates)){
+            //coords need no transformation
+        }
+        else if(checkDMScoord1(coordinates)){
+           //convert to decimal
+        }
+        else if(checkDMScoord2(coordinates)){
+            //convert to decimal
+        }
+        else if(checkDegreecoord1(coordinates)){
+            //convert to decimal
+        }
+        else if(checkDegreecoord2(coordinates)){
+            //convert to decimal
+        }
+
+        return coordinates;
+    }
+
+    private boolean unpackZip(String path, String zipname)
+    {
+        InputStream is;
+        ZipInputStream zis;
+        try
+        {
+            String filename;
+            is = new FileInputStream(path + zipname);
+            zis = new ZipInputStream(new BufferedInputStream(is));
+            ZipEntry ze;
+            byte[] buffer = new byte[1024];
+            int count;
+
+            while ((ze = zis.getNextEntry()) != null)
+            {
+                filename = ze.getName();
+
+                if (ze.isDirectory()) {
+                    File fmd = new File(path + zipname);
+                    fmd.mkdirs();
+                    continue;
+                }
+
+                if(getFileExtension(filename).equalsIgnoreCase("kml")){
+                    //not handled when there are more than one kml in the kmz
+                    FileOutputStream fout = new FileOutputStream(path + zipname.replace("kmz","kml"));
+
+                    while ((count = zis.read(buffer)) != -1)
+                    {
+                        fout.write(buffer, 0, count);
+                    }
+                    fout.close();
+                }
+
+                zis.closeEntry();
+            }
+
+            zis.close();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkDMScoord1(String coordinates){
+        // º ' " with +/-
+        String regex_coords = "([+-]?(\\d+)D(\\d+)M(\\d+\\.\\d+)?S)\\s*,\\s*([+-]?(\\d+)D(\\d+)M(\\d+\\.\\d+)?S)";
+
+        Pattern regExPattern = Pattern.compile(regex_coords);
+        Matcher regExMatcher= regExPattern.matcher(coordinates);
+        if(regExMatcher.matches()){
+            return true;
+        }
+        else return false;
+    }
+    public boolean checkDMScoord2(String coordinates){
+        // º ' " with NSEW
+        String regex_coords = "((\\d+)D(\\d+)M(\\d+\\.\\d+)?S[NSEW]?)\\s*,\\s*((\\d+)D(\\d+)M(\\d+\\.\\d+)?S[NSEW]?)";
+
+        Pattern regExPattern = Pattern.compile(regex_coords);
+        Matcher regExMatcher= regExPattern.matcher(coordinates);
+        if(regExMatcher.matches()){
+            return true;
+        }
+        else return false;
+    }
+    public boolean checkDegreecoord1(String coordinates){
+    // º ' " with +/-
+        String regex_coords = "([+-]?(\\d+)°(\\d+)'(\\d+\\.\\d+)?\")\\s*,\\s*([+-]?(\\d+)°(\\d+)'(\\d+\\.\\d+)?\")";
+
+        Pattern regExPattern = Pattern.compile(regex_coords);
+        Matcher regExMatcher= regExPattern.matcher(coordinates);
+        if(regExMatcher.matches()){
+            return true;
+        }
+        else return false;
+    }
+    public boolean checkDegreecoord2(String coordinates){
+    // º ' " with NSEW
+        String regex_coords = "((\\d+)°(\\d+)'(\\d+\\.\\d+)?\"[NSEW]?)\\s*,\\s*((\\d+)°(\\d+)'(\\d+\\.\\d+)?\"[NSEW]?)";
+
+        Pattern regExPattern = Pattern.compile(regex_coords);
+        Matcher regExMatcher= regExPattern.matcher(coordinates);
+        if(regExMatcher.matches()){
+            return true;
+        }
+        else return false;
+    }
+    public boolean checkDecimalCoords(String coordinates){
+        String regex_coords = "([+-]?\\d+\\.?\\d+)\\s*,\\s*([+-]?\\d+\\.?\\d+)";
+
+        Pattern regExPattern = Pattern.compile(regex_coords);
+        Matcher regExMatcher= regExPattern.matcher(coordinates);
+        if(regExMatcher.matches()){
+            return true;
+        }
+        else return false;
+    }
+
     public String getFileNameNoExtension(File file){
         String name = file.getName();
         int pos = name.lastIndexOf(".");

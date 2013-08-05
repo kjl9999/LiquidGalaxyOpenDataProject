@@ -48,6 +48,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         final TextView maintext = (TextView) findViewById(R.id.textView);
+
+        showAllData();
+
         Button button= (Button) findViewById(R.id.refresh);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,10 +170,10 @@ public void generateKeys(){
 
             for (File child : dir.listFiles()) {
                //check if file is a kml
-               // if(getFileExtension(child.getName())=="kml")
-                kmldata=getDataset(child);
-                test.append(child.getName()+"--------------\n------------\n\n"+kmldata.toString()+"\n\n"); //this is a test
-
+               if(getFileExtension(child.getName()).equalsIgnoreCase("kml")){
+                   kmldata=getDataset(child);
+                   test.append(child.getName()+"--------------\n------------\n\n"+kmldata.toString()+"\n\n"); //this is a test
+               }
                 // + Add the list to an expandable list view.
             }
         }
