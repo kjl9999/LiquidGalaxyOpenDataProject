@@ -55,6 +55,7 @@ public class newurl extends Activity {
     csv csvFile = new csv();
     private ArrayList<Placemark> placemarks;
     Button next;
+    dataBank bank;
 
 
     @Override
@@ -67,7 +68,7 @@ public class newurl extends Activity {
         downloaderThread = null;
         progressDialog = null;
         step=0;
-
+        bank = new dataBank();
 
         EditText urlInputField = (EditText) findViewById(R.id.url_input);
         //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/hostaleria.csv");
@@ -94,6 +95,13 @@ public class newurl extends Activity {
                 if(ext.equalsIgnoreCase("kml")){
                     downloaderThread = new DownloaderThread(thisActivity, urlInput);
                     downloaderThread.start();
+                    try {
+                        downloaderThread.join();            //thread.join() waits untill the file is downloaded, fut freezes the screen, need to find a better way.
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    bank.addDataSource(getNewestFileInDirectory().getName(),urlInput,getNewestFileInDirectory().getAbsolutePath());
+                    NavUtils.navigateUpFromSameTask(newurl.this);
                 }
                 else if(ext.equalsIgnoreCase("csv")){
 
@@ -224,7 +232,8 @@ public class newurl extends Activity {
 
                         //writing a kml file
                         writeKMLFile(placemarks);
-
+                        bank.addDataSource(getNewestFileInDirectory().getName(),urlInput,getNewestFileInDirectory().getAbsolutePath());
+                        NavUtils.navigateUpFromSameTask(newurl.this);
 
                     }
 
@@ -242,6 +251,8 @@ public class newurl extends Activity {
                     File kmzFile = getNewestFileInDirectory();
 
                     unpackZip(Environment.getExternalStorageDirectory()+"/LGOD/", kmzFile.getName());
+                    bank.addDataSource(getNewestFileInDirectory().getName(),urlInput,getNewestFileInDirectory().getAbsolutePath());
+                    NavUtils.navigateUpFromSameTask(newurl.this);
 
                 }
                 else {

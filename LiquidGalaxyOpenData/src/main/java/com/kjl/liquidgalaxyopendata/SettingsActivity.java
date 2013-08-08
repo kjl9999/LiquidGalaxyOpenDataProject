@@ -70,12 +70,9 @@ public class SettingsActivity extends Activity {
         {
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id)
             {
-                AlertDialog.Builder adb = new AlertDialog.Builder(
-                        SettingsActivity.this);
-                adb.setTitle("ListView OnClick");
-                adb.setMessage("Selected Item is = " + lglist.getItemAtPosition(position));
-                adb.setPositiveButton("Ok", null);
-                adb.show();
+                Intent intent;
+                intent = new Intent(getApplicationContext() , ConnectionActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -4,11 +4,12 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <activity android:windowSoftInputMode="adjustResize"> </activity>
+    <activity android:windowSoftInputMode="adjustResize" >
+    </activity>
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -44,7 +45,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="SettingsActivity" />
         </activity>
-
+        <activity
+            android:name="com.kjl.liquidgalaxyopendata.ConnectionActivity"
+            android:label="@string/title_activity_connection"
+            android:parentActivityName="SettingsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="SettingsActivity" />
+        </activity>
     </application>
 
 </manifest>

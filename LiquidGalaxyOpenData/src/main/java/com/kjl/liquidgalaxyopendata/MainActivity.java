@@ -14,9 +14,11 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -40,6 +42,7 @@ import com.jcraft.jsch.*;
 public class MainActivity extends Activity {
 
     private final String TAG = "MainActivity";
+    String[] params;
 
 
     @Override
@@ -78,12 +81,35 @@ public class MainActivity extends Activity {
 
 
                 //showAllData();
-                /*
+
                 //testing ssh
+
+
+                File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
+
+                if (file.exists()){
+                    FileInputStream inputStream=null;
+
+                    try {
+                        inputStream = new FileInputStream(file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    try {
+                        params = reader.readLine().split(";");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 new Thread(new Runnable() {
                     public void run() {
                         try {
-                            executeRemoteCommand("lg", "lqgalaxy", "10.42.42.1", 22);
+                            executeRemoteCommand(params[0], params[1], params[2], 22);  //dynamic version (port still hardcoded to 22)
+                            //executeRemoteCommand("lg", "lqgalaxy", "10.42.42.1", 22); //hardcoded version
                         } catch (Exception e) {
                             e.printStackTrace();
                             TextView tv1 = (TextView) findViewById(R.id.textView);
@@ -92,7 +118,7 @@ public class MainActivity extends Activity {
                     }
                 }).start();
                 //end testing ssh
-                */
+
 
                 //generating keys is no longer used
                 //test generate key

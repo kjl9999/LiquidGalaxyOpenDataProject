@@ -25,7 +25,8 @@
     <string name="progress_dialog_message_prefix_downloading">Downloading file</string>
     <string name="progress_dialog_message_prefix_connecting">Connecting to</string>
     <string name="user_message_download_complete">Download complete!</string>
-    <string name="user_message_download_canceled">Download canceled!</string><string name="csvhint">CSV</string>
+    <string name="user_message_download_canceled">Download canceled!</string>
+    <string name="csvhint">CSV</string>
     <string name="csvmappingname">Select your document\'s column that represents the points name.</string>
     <string name="name">Name</string>
     <string name="csvmappingdesc">Select your document\'s column that represents the points description.</string>
@@ -36,13 +37,11 @@
     <string name="singlecoords">One single field</string>
     <string name="separatecoords">Separate fields</string>
     <string name="coordtype">Coordinade representation</string>
-
     <string name="csvmappingcoordx">Select your document\'s column that represents the Longitude.</string>
     <string name="coordx">Longitude</string>
     <string name="csvmappingcoordy">Select your document\'s column that represents the Latitude.</string>
     <string name="coordy">Latitude</string>
     <string name="Finish">Finish</string>
-
-
+    <string name="title_activity_connection">Connection</string><string name="user">User:</string><string name="password">Password:</string><string name="ip">IP:</string><string name="sshkey">SSH key:</string><string name="save">Save</string><string name="discard">Discard</string>
 
 </resources>
