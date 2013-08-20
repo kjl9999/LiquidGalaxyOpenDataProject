@@ -72,7 +72,8 @@ public class newurl extends Activity {
 
         EditText urlInputField = (EditText) findViewById(R.id.url_input);
         //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/hostaleria.csv");
-        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/educacio_primaria.kmz");
+        //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/educacio_primaria.kmz");
+        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/parades_bus.kml");
 
 
         Button back= (Button) findViewById(R.id.BtnBack);

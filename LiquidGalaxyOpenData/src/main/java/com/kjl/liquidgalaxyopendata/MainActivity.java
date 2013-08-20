@@ -19,15 +19,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -59,31 +62,9 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                csv csvFile = new csv();
-                csvFile.setCsvReader("allotjaments_hostaleria_federacio.csv");
-
-                //gets the first row so users can select fields
-                ArrayList<String> line=csvFile.getLine(0);
-
-                //gets the placemarks using the selected rows
-                ArrayList<Placemark> CSVplacemarks = csvFile.readCSV(3,4,10,11);
-                maintext.append(CSVplacemarks.get(0).getTitle()+", ");
-                maintext.append(CSVplacemarks.get(0).getDescription()+", ");
-                maintext.append(CSVplacemarks.get(0).getCoordinates()+"\n");
-
-                maintext.append(CSVplacemarks.get(1).getTitle()+", ");
-                maintext.append(CSVplacemarks.get(1).getDescription()+", ");
-                maintext.append(CSVplacemarks.get(1).getCoordinates()+"\n");
-
-                maintext.append(CSVplacemarks.get(2).getTitle()+", ");
-                maintext.append(CSVplacemarks.get(2).getDescription()+", ");
-                maintext.append(CSVplacemarks.get(2).getCoordinates()+"\n");
-
-
                 //showAllData();
 
                 //testing ssh
-
 
                 File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
 
@@ -107,9 +88,35 @@ public class MainActivity extends Activity {
 
                 new Thread(new Runnable() {
                     public void run() {
+
+
+                        String text="";
                         try {
-                            executeRemoteCommand(params[0], params[1], params[2], 22);  //dynamic version (port still hardcoded to 22)
-                            //executeRemoteCommand("lg", "lqgalaxy", "10.42.42.1", 22); //hardcoded version
+
+                            BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/educacio_primaria.kml"));
+                            try {
+                                StringBuilder sb = new StringBuilder();
+                                String line = br.readLine();
+
+                                while (line != null) {
+                                    sb.append(line);
+                                    sb.append('\n');
+                                    line = br.readLine();
+                                }
+                                text = sb.toString();
+                            } finally {
+                                br.close();
+                            }
+
+
+                            sendFile("educacio2.kml");
+                            executeRemoteCommand(params[0], params[1], params[2], 22, "googleearth /home/lg/hostaleria_LGOD.kml");
+
+                            //executeRemoteCommand(params[0], params[1], params[2], 22, "echo '"+text+"' > /home/lg/educacio2.kml");  //dynamic version (port still hardcoded to 22)
+
+                            //uploadFile(params[0], params[1], params[2], 22);  //dynamic version (port still hardcoded to 22)
+                            //executeRemoteCommand(params[0], params[1], params[2], 22, "echo 'search=pobla de segur' > /tmp/query.txt");  //dynamic version (port still hardcoded to 22)
+                            //executeRemoteCommand("lg", "pinballmod", "10.42.42.1", 22,"echo 'search=Pobla de segur' > /tmp/query.txt"); //hardcoded version
                         } catch (Exception e) {
                             e.printStackTrace();
                             TextView tv1 = (TextView) findViewById(R.id.textView);
@@ -121,24 +128,48 @@ public class MainActivity extends Activity {
 
 
                 //generating keys is no longer used
-                //test generate key
-                //generateKeys();
-                //end test
+
             }
         });
-        TextView tv = (TextView)findViewById(R.id.textView);
     }
-
-    public String executeRemoteCommand(
-            String username,
-            String password,
-            String hostname,
-            int port) throws Exception {
+    public void sendFile(final String localFile){
+        File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
+        if (file.exists()){
+            FileInputStream inputStream=null;
+            try {
+                inputStream = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            try {
+                params = reader.readLine().split(";");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         new Thread(new Runnable() {
             public void run() {
+
+                String text="";
                 try {
-                    executeRemoteCommand("lg", "lqgalaxy", "10.42.42.1", 22);
+                    BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/"+localFile));
+                    //reads the file's content
+                    try {
+                        StringBuilder sb = new StringBuilder();
+                        String line = br.readLine();
+                        while (line != null) {
+                            sb.append(line);
+                            sb.append('\n');
+                            line = br.readLine();
+                        }
+                        text = sb.toString();
+                    } finally {
+                        br.close();
+                    }
+                    //sends the file's content
+                    executeRemoteCommand(params[0], params[1], params[2], 22, "echo '"+text+"' > /home/lg/"+localFile);  //dynamic version (port still hardcoded to 22)
                 } catch (Exception e) {
                     e.printStackTrace();
                     TextView tv1 = (TextView) findViewById(R.id.textView);
@@ -146,8 +177,42 @@ public class MainActivity extends Activity {
                 }
             }
         }).start();
+    }
 
-        return "exeption";
+    public String executeRemoteCommand(
+            final String username,
+            final String password,
+            final String hostname,
+            int port,
+            final String command) throws Exception {
+
+        JSch jsch = new JSch();
+        String privateKey = Environment.getExternalStorageDirectory()+"/LGOD/conf/lg-id_rsa";
+        jsch.addIdentity(privateKey);
+
+        Session session = jsch.getSession(username, hostname, port);
+        session.setPassword(password);
+
+
+        // Avoid asking for key confirmation
+        Properties prop = new Properties();
+        prop.put("StrictHostKeyChecking", "no");
+        session.setConfig(prop);
+
+        session.connect();
+
+        // SSH Channel
+        ChannelExec channelssh = (ChannelExec)
+                session.openChannel("exec");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        channelssh.setOutputStream(baos);
+
+        // Execute command
+        channelssh.setCommand(command);
+        channelssh.connect();
+        channelssh.disconnect();
+
+        return baos.toString();
     }
 
 public void generateKeys(){
@@ -164,9 +229,8 @@ public void generateKeys(){
                         "       java KeyGen dsa  output_keyfile comment");
         System.exit(-1);
     }
-    String filename=Environment.getExternalStorageDirectory()+"/LGOD/lg-id_rsa";   ///////////////////////
-    String comment="Liquid Galaxy";                                                          //what is that comment?
-                                                                                ///////////////////////
+    String filename=Environment.getExternalStorageDirectory()+"/LGOD/conf/lg-id_rsa";
+    String comment="Liquid Galaxy";
     JSch jsch=new JSch();
 
 
@@ -187,6 +251,7 @@ public void generateKeys(){
         tv.append("exeption: "+e.getMessage());
     }
 }
+
     public void showAllData(){
         //for each file in /LGOD/ do getDataset and append to a expandable list
         File dir = new File(Environment.getExternalStorageDirectory()+"/LGOD/");
@@ -205,6 +270,7 @@ public void generateKeys(){
         }
 
     }
+
 private String getFileExtension(String urlInput) {
     String extension = "";
 

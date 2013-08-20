@@ -1,6 +1,7 @@
 package com.kjl.liquidgalaxyopendata;
 
 import android.os.Environment;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -61,6 +62,7 @@ public class dataBank {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public ArrayList<dataSource> getDataSources() {
@@ -93,7 +95,7 @@ public class dataBank {
 
             File file = new File(bankpath);
 
-            // if file doesnt exists, then create it
+            // if file doesn't exists, then create it
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -116,8 +118,5 @@ public class dataBank {
             }
         }
     }
-
-
-
 
 }
