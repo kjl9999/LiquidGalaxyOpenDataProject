@@ -1,6 +1,7 @@
 package com.kjl.liquidgalaxyopendata;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -8,10 +9,13 @@ import android.service.textservice.SpellCheckerService;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -46,15 +50,92 @@ public class MainActivity extends Activity {
 
     private final String TAG = "MainActivity";
     String[] params;
-
+    dataBank DB = new dataBank();
+    ArrayList<dataSource> DBsources = DB.getDataSources();
+    int listPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView maintext = (TextView) findViewById(R.id.textView);
+        final ListView DSlist = (ListView) findViewById(R.id.datalist);
+        final ArrayAdapter<String> listAdapter ;
+        listAdapter = new ArrayAdapter<String>(this, R.layout.listlayout);
+        for(int i = 0; i<DBsources.size(); i++){
+            listAdapter.add(DBsources.get(i).getName());
+        }
 
+        DSlist.setAdapter(listAdapter);
+
+        DSlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+                File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
+                listPosition=position;
+
+                if (file.exists()){
+                    FileInputStream inputStream=null;
+                    try {
+                        inputStream = new FileInputStream(file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    try {
+                        params = reader.readLine().split(";");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                new Thread(new Runnable() {
+                    public void run() {
+                        //gets the file content as a string
+                        String text="";
+                        try {
+                            BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/educacio_primaria.kml"));
+                            try {
+                                StringBuilder sb = new StringBuilder();
+                                String line = br.readLine();
+
+                                while (line != null) {
+                                    sb.append(line);
+                                    sb.append('\n');
+                                    line = br.readLine();
+                                }
+                                text = sb.toString();
+                            } finally {
+                                br.close();
+                            }
+                        //links the file to the master kml
+                        //and
+                            String username = params[0];
+                            String password = params[1];
+                            String ipaddress = params[2];
+                            //ssh key not used here?
+                            String query = params[4];
+                            String kmlstxt = params[5];
+                            String kmlsfolder = params[6];
+                            String serverURL =params[7];
+                            String filename = DBsources.get(listPosition).getName();
+                            String lat = getLatLong(DBsources.get(listPosition).getName())[1];
+                            String lon = getLatLong(DBsources.get(listPosition).getName())[0];
+                            String command = "echo '"+serverURL+filename+"' > /var/www/kmls.txt";
+                            String flyto = "flytoview=<LookAt><longitude>"+lon+"</longitude><latitude>"+lat+"</latitude><altitude>0</altitude><tilt>68.68179673613697</tilt><range>774.4323347622752</range><altitudeMode>relativeToGround</altitudeMode><gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode></LookAt>";
+
+                            executeRemoteCommand(username, password, ipaddress, 22, command);                                             //writes filename url on kmls.txt
+                            executeRemoteCommand(username, password, ipaddress, 22, "echo '"+flyto+"' > "+query+"");
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            TextView tv1 = (TextView) findViewById(R.id.textView);
+                            tv1.append("exeption: "+e.getMessage()); //here the app would crash since can't print from the thread
+                        }
+                    }
+                }).start();
+            }
+        });
         showAllData();
 
         Button button= (Button) findViewById(R.id.refresh);
@@ -92,31 +173,10 @@ public class MainActivity extends Activity {
 
                         String text="";
                         try {
+                            executeRemoteCommand(params[0], params[1], params[2], 22, "whoami > test.txt");
+                            //executeRemoteCommand(params[0], params[1], params[2], 22, "echo 'hola' > test.txt");        //escriure el kml al /var/www/kml/kmls.txt
+                            //executeRemoteCommand(params[0], params[1], params[2], 22, "echo 'search=pobla de segur' > /tmp/query.txt");       //escriure la localització a query.txt
 
-                            BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/educacio_primaria.kml"));
-                            try {
-                                StringBuilder sb = new StringBuilder();
-                                String line = br.readLine();
-
-                                while (line != null) {
-                                    sb.append(line);
-                                    sb.append('\n');
-                                    line = br.readLine();
-                                }
-                                text = sb.toString();
-                            } finally {
-                                br.close();
-                            }
-
-
-                            sendFile("educacio2.kml");
-                            executeRemoteCommand(params[0], params[1], params[2], 22, "googleearth /home/lg/hostaleria_LGOD.kml");
-
-                            //executeRemoteCommand(params[0], params[1], params[2], 22, "echo '"+text+"' > /home/lg/educacio2.kml");  //dynamic version (port still hardcoded to 22)
-
-                            //uploadFile(params[0], params[1], params[2], 22);  //dynamic version (port still hardcoded to 22)
-                            //executeRemoteCommand(params[0], params[1], params[2], 22, "echo 'search=pobla de segur' > /tmp/query.txt");  //dynamic version (port still hardcoded to 22)
-                            //executeRemoteCommand("lg", "pinballmod", "10.42.42.1", 22,"echo 'search=Pobla de segur' > /tmp/query.txt"); //hardcoded version
                         } catch (Exception e) {
                             e.printStackTrace();
                             TextView tv1 = (TextView) findViewById(R.id.textView);
@@ -131,7 +191,41 @@ public class MainActivity extends Activity {
 
             }
         });
+        //
     }
+    private String[] getLatLong(String name){
+        ArrayList<dataSource> dataFiles = DB.getDataSources();
+        String[] coords = new String[2];
+        for(int i = 0; i<dataFiles.size(); i++){
+            if (dataFiles.get(i).getName().equalsIgnoreCase(name)){
+                //gets the first coord from the file
+                File kmlfile = new File(Environment.getExternalStorageDirectory()+"/LGOD/"+name);
+                NavigationDataSet kmldata;
+                kmldata=getDataset(kmlfile);
+                String tempcoords=kmldata.getPlacemarks().get(0).getCoordinates();
+                coords=tempcoords.split(",");
+                return coords;
+            }
+        }
+        return coords;
+    }
+
+    private String getCoordinates(String name) {
+        ArrayList<dataSource> dataFiles = DB.getDataSources();
+        String coords = "";
+        for(int i = 0; i<dataFiles.size(); i++){
+            if (dataFiles.get(i).getName().equalsIgnoreCase(name)){
+                //gets the first coord from the file
+                File kmlfile = new File(Environment.getExternalStorageDirectory()+"/LGOD/"+name);
+                NavigationDataSet kmldata;
+                kmldata=getDataset(kmlfile);
+                coords=kmldata.getPlacemarks().get(0).getCoordinates();
+                return coords;
+            }
+        }
+        return "0,0";
+    }
+
     public void sendFile(final String localFile){
         File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
         if (file.exists()){
@@ -152,7 +246,7 @@ public class MainActivity extends Activity {
         new Thread(new Runnable() {
             public void run() {
 
-                String text="";
+                String text="hola";
                 try {
                     BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/"+localFile));
                     //reads the file's content

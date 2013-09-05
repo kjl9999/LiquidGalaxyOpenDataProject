@@ -27,7 +27,7 @@ public class SettingsActivity extends Activity {
         //DATA SOURCES
         final ListView dslist = (ListView) findViewById(R.id.datasourcelist);
         final ArrayAdapter<String> listAdapter ;
-        // Create ArrayAdapter using the planet list.
+        // Create ArrayAdapter
         listAdapter = new ArrayAdapter<String>(this, R.layout.listlayout);
         listAdapter.add(getString(R.string.newds));
         listAdapter.add(getString(R.string.manageds));
@@ -64,15 +64,23 @@ public class SettingsActivity extends Activity {
         // Create ArrayAdapter using the planet list.
         listAdapter2 = new ArrayAdapter<String>(this, R.layout.listlayout);
         listAdapter2.add(getString(R.string.connect));
+        listAdapter2.add(getString(R.string.scripts));
         lglist.setAdapter(listAdapter2);
 
         lglist.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id)
             {
-                Intent intent;
-                intent = new Intent(getApplicationContext() , ConnectionActivity.class);
-                startActivity(intent);
+                if(position==0){
+                    Intent intent;
+                    intent = new Intent(getApplicationContext() , ConnectionActivity.class);
+                    startActivity(intent);}
+                else if (position==1){
+                    Intent intent;
+                    intent = new Intent(getApplicationContext() , ScriptsActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 

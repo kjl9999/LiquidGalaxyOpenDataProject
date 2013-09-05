@@ -40,6 +40,11 @@ public class ConnectionActivity extends Activity {
         EditText user = (EditText) findViewById(R.id.useret);
         EditText pwd = (EditText) findViewById(R.id.pwdet);
         EditText ip = (EditText) findViewById(R.id.ipet);
+        EditText ssh = (EditText) findViewById(R.id.sshet);
+        EditText query = (EditText) findViewById(R.id.queryet);
+        EditText kmlstxt = (EditText) findViewById(R.id.kmlstxtet);
+        EditText kmls = (EditText) findViewById(R.id.kmlset);
+        EditText kmlsurl = (EditText) findViewById(R.id.kmlsurlet);
 
         File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
 
@@ -60,6 +65,11 @@ public class ConnectionActivity extends Activity {
                 user.setText(params[0]);
                 pwd.setText(params[1]);
                 ip.setText(params[2]);
+                ssh.setText(params[3]);
+                query.setText(params[4]);
+                kmlstxt.setText(params[5]);
+                kmls.setText(params[6]);
+                kmlsurl.setText(params[7]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -73,6 +83,11 @@ public class ConnectionActivity extends Activity {
                 EditText user = (EditText) findViewById(R.id.useret);
                 EditText pwd = (EditText) findViewById(R.id.pwdet);
                 EditText ip = (EditText) findViewById(R.id.ipet);
+                EditText ssh = (EditText) findViewById(R.id.sshet);
+                EditText query = (EditText) findViewById(R.id.queryet);
+                EditText kmlstxt = (EditText) findViewById(R.id.kmlstxtet);
+                EditText kmls = (EditText) findViewById(R.id.kmlset);
+                EditText kmlsurl = (EditText) findViewById(R.id.kmlsurlet);
 
                 if(user.getText().toString().matches("") ){
                     Toast.makeText(getApplicationContext(),"Enter a user.",Toast.LENGTH_LONG);
@@ -98,7 +113,14 @@ public class ConnectionActivity extends Activity {
 
                         FileWriter fw = new FileWriter(file.getAbsoluteFile());
                         BufferedWriter bw = new BufferedWriter(fw);
-                        bw.write(user.getText().toString()+";"+pwd.getText().toString()+";"+ip.getText().toString()); //user;pwd;ip
+                        bw.write(user.getText().toString() + ";"
+                                + pwd.getText().toString() + ";"
+                                + ip.getText().toString() + ";"
+                                + ssh.getText().toString() + ";"
+                                + query.getText().toString() + ";"
+                                + kmlstxt.getText().toString() + ";"
+                                + kmls.getText().toString() + ";"
+                                + kmlsurl.getText().toString()); //user;pwd;ip
                         bw.close();
 
                     } catch (IOException e) {

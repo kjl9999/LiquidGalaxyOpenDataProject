@@ -20,15 +20,25 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -56,6 +66,8 @@ public class newurl extends Activity {
     private ArrayList<Placemark> placemarks;
     Button next;
     dataBank bank;
+    String[] params;
+
 
 
     @Override
@@ -72,8 +84,8 @@ public class newurl extends Activity {
 
         EditText urlInputField = (EditText) findViewById(R.id.url_input);
         //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/hostaleria.csv");
-        //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/educacio_primaria.kmz");
-        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/parades_bus.kml");
+        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/educacio_primaria.kmz");
+        //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/parades_bus.kml");
 
 
         Button back= (Button) findViewById(R.id.BtnBack);
@@ -102,6 +114,7 @@ public class newurl extends Activity {
                         e.printStackTrace();
                     }
                     bank.addDataSource(getNewestFileInDirectory().getName(),urlInput,getNewestFileInDirectory().getAbsolutePath());
+                    sendFile(getNewestFileInDirectory().getName());
                     NavUtils.navigateUpFromSameTask(newurl.this);
                 }
                 else if(ext.equalsIgnoreCase("csv")){
@@ -234,6 +247,7 @@ public class newurl extends Activity {
                         //writing a kml file
                         writeKMLFile(placemarks);
                         bank.addDataSource(getNewestFileInDirectory().getName(),urlInput,getNewestFileInDirectory().getAbsolutePath());
+                        sendFile(getNewestFileInDirectory().getName());
                         NavUtils.navigateUpFromSameTask(newurl.this);
 
                     }
@@ -252,15 +266,99 @@ public class newurl extends Activity {
                     File kmzFile = getNewestFileInDirectory();
 
                     unpackZip(Environment.getExternalStorageDirectory()+"/LGOD/", kmzFile.getName());
-                    bank.addDataSource(getNewestFileInDirectory().getName(),urlInput,getNewestFileInDirectory().getAbsolutePath());
+                    bank.addDataSource(getNewestFileInDirectory().getName().replace(".kmz",".kml"),urlInput,getNewestFileInDirectory().getAbsolutePath().replace(".kmz",".kml"));
+                    sendFile(getNewestFileInDirectory().getName().replace(".kmz",".kml"));
                     NavUtils.navigateUpFromSameTask(newurl.this);
-
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "This file extension is not supported: "+ext, Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    public void sendFile(final String localFile){
+        File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
+        if (file.exists()){
+            FileInputStream inputStream=null;
+            try {
+                inputStream = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            try {
+                params = reader.readLine().split(";");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        new Thread(new Runnable() {
+            public void run() {
+
+                String text="hola";
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/"+localFile));
+                    //reads the file's content
+                    try {
+                        StringBuilder sb = new StringBuilder();
+                        String line = br.readLine();
+                        while (line != null) {
+                            sb.append(line);
+                            sb.append('\n');
+                            line = br.readLine();
+                        }
+                        text = sb.toString();
+                    } finally {
+                        br.close();
+                    }
+                    //sends the file's content
+                    executeRemoteCommand(params[0], params[1], params[2], 22, "echo '"+text+"' > /var/www/kml/"+localFile);     //Sends 'localfile' to the server
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    TextView tv1 = (TextView) findViewById(R.id.textView);
+                    tv1.append("exeption: "+e.getMessage()); //here the app would crash since can't print from the thread
+                }
+            }
+        }).start();
+    }
+
+    public String executeRemoteCommand(
+            final String username,
+            final String password,
+            final String hostname,
+            int port,
+            final String command) throws Exception {
+
+        JSch jsch = new JSch();
+        String privateKey = Environment.getExternalStorageDirectory()+"/LGOD/conf/lg-id_rsa";
+        jsch.addIdentity(privateKey);
+
+        Session session = jsch.getSession(username, hostname, port);
+        session.setPassword(password);
+
+
+        // Avoid asking for key confirmation
+        Properties prop = new Properties();
+        prop.put("StrictHostKeyChecking", "no");
+        session.setConfig(prop);
+
+        session.connect();
+
+        // SSH Channel
+        ChannelExec channelssh = (ChannelExec)
+                session.openChannel("exec");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        channelssh.setOutputStream(baos);
+
+        // Execute command
+        channelssh.setCommand(command);
+        channelssh.connect();
+        channelssh.disconnect();
+
+        return baos.toString();
     }
 
     // this function will be used if more coordinate formats are accepted by the app

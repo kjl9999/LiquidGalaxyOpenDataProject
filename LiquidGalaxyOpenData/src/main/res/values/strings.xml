@@ -42,6 +42,18 @@
     <string name="csvmappingcoordy">Select your document\'s column that represents the Latitude.</string>
     <string name="coordy">Latitude</string>
     <string name="Finish">Finish</string>
-    <string name="title_activity_connection">Connection</string><string name="user">User:</string><string name="password">Password:</string><string name="ip">IP:</string><string name="sshkey">SSH key:</string><string name="save">Save</string><string name="discard">Discard</string>
+    <string name="title_activity_connection">Connection</string>
+    <string name="user">User:</string>
+    <string name="password">Password:</string>
+    <string name="ip">IP:</string>
+    <string name="sshkey">SSH key:</string>
+    <string name="save">Save</string>
+    <string name="discard">Discard</string>
+    <string name="title_activity_scripts">Scripts</string>
+    <string name="scripts">Launch a script.</string>
+    <string name="querytxt">Query.txt path:</string>
+    <string name="kmlstxt">kmls.txt path:</string>
+    <string name="kmlsfolder">kmls folder path:</string>
+    <string name="kmlurl">kmls server url:</string>
 
 </resources>

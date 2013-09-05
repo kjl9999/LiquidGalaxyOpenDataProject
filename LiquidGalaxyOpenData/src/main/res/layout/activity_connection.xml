@@ -11,7 +11,9 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/relativeLayout"
+            android:layout_alignParentTop="true">
 
         <TextView
                 style="?android:attr/listSeparatorTextViewStyle"
@@ -26,80 +28,174 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"/>
 
-        <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/relativeLayout">
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/user"
-                        android:id="@+id/usertv"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginRight="4dp"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/password"
-                        android:id="@+id/passwordtv"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginRight="4dp"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/ip"
-                        android:id="@+id/iptv"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginRight="4dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/useret"/>
-
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:ems="10"
-                        android:id="@+id/pwdet"/>
-
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/ipet"
-                        android:digits="1234567890."/>
-            </LinearLayout>
-
-        </LinearLayout>
-
         <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/scrollView"/>
+                android:id="@+id/scrollView">
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/relativeLayout">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/user"
+                            android:id="@+id/usertv"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="4dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/password"
+                            android:id="@+id/passwordtv"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="4dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/ip"
+                            android:id="@+id/iptv"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="4dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/sshkey"
+                            android:id="@+id/textView2"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="4dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/querytxt"
+                            android:id="@+id/textView3"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="4dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/kmlstxt"
+                            android:id="@+id/textView5"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="4dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/kmlsfolder"
+                            android:id="@+id/textView4"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="4dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/kmlurl"
+                            android:id="@+id/textView6"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginRight="4dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/useret"/>
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:ems="10"
+                            android:id="@+id/pwdet"/>
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:id="@+id/ipet"
+                            android:digits="1234567890."/>
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:id="@+id/sshet"
+                            />
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:id="@+id/queryet"
+                            />
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:id="@+id/kmlstxtet"
+                            />
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:id="@+id/kmlset"
+                            android:inputType="text"/>
+
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:id="@+id/kmlsurlet"
+                            android:inputType="text"/>
+                </LinearLayout>
+
+                <ScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/scrollView2"/>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
     <RelativeLayout
