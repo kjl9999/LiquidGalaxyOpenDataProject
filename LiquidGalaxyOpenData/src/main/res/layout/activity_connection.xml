@@ -156,7 +156,7 @@
                             android:inputType="text"
                             android:ems="10"
                             android:id="@+id/sshet"
-                            />
+                            android:text="lg-id_rsa"/>
 
                     <EditText
                             android:layout_width="match_parent"
@@ -164,7 +164,7 @@
                             android:inputType="text"
                             android:ems="10"
                             android:id="@+id/queryet"
-                            />
+                            android:text="/tmp/query.txt"/>
 
                     <EditText
                             android:layout_width="match_parent"
@@ -172,21 +172,23 @@
                             android:inputType="text"
                             android:ems="10"
                             android:id="@+id/kmlstxtet"
-                            />
+                            android:text="/var/www/kmls.txt"/>
 
                     <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:id="@+id/kmlset"
-                            android:inputType="text"/>
+                            android:inputType="text"
+                            android:text="/var/www/kml"/>
 
                     <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:id="@+id/kmlsurlet"
-                            android:inputType="text"/>
+                            android:inputType="text"
+                            android:text="http://lg1:81/kml/"/>
                 </LinearLayout>
 
                 <ScrollView

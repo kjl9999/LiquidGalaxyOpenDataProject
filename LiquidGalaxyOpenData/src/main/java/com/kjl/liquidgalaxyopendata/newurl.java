@@ -44,6 +44,25 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+/*
+This is the Adding new files screen
+the user is initialy shown a textbox to enter the URL of the file to be downloaded
+if the file is not compatible with Google Earth conversion is done (CSV mapping only supported right now)
+compatible files are added to the apps library
+and sent to the Liquid Galaxy
+ */
+
+
+//TO DO:
+//DON'T LET ADD FILES IF CONNECTION IS NOT CONFIGURED
+//OR
+//ADD A BUTTON TO SEND ALL FILES TO LIQUID GALAXY
+
+//TO DO:
+//ASK USER IF KMZ DATA IS A LIST OF PLACEMARKS OR OTHER DATA
+//IF PLACEMARKS THEN UNPACK TO GET LIST
+//IF NOT THEN DONT UNPACK AND SEND THE KMZ FILE TO LIQUID GALAXY
+
 
 public class newurl extends Activity {
 
@@ -68,8 +87,6 @@ public class newurl extends Activity {
     dataBank bank;
     String[] params;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +100,11 @@ public class newurl extends Activity {
         bank = new dataBank();
 
         EditText urlInputField = (EditText) findViewById(R.id.url_input);
-        //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/hostaleria.csv");
-        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/educacio_primaria.kmz");
-        //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/parades_bus.kml");
 
+        //these are some hardcoded urls for testing purposes
+        urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/hostaleria.csv");
+        //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/educacio_primaria.kmz");
+        //urlInputField.setText("https://googledrive.com/host/0B3IQnYh_y3OXNUoyb1k3YlF0TTA/parades_bus.kml");
 
         Button back= (Button) findViewById(R.id.BtnBack);
         back.setOnClickListener(new View.OnClickListener() {
@@ -96,15 +114,19 @@ public class newurl extends Activity {
             }
         });
 
+        //on clicking next the file is downloaded, conversion is done if needed and finally file is sent to Liquid Galaxy
         next= (Button) findViewById(R.id.BtnNext);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Toast.makeText(getApplicationContext(),"step: "+String.valueOf(step),Toast.LENGTH_LONG);
                 EditText urlInputField = (EditText) findViewById(R.id.url_input);
                 String urlInput = urlInputField.getText().toString();
                 String ext = getFileExtension(urlInput);
 
+                //if it's a KML file:
+                //-download file
+                //-send to Liquid Galaxy
+                //-add to the library
                 if(ext.equalsIgnoreCase("kml")){
                     downloaderThread = new DownloaderThread(thisActivity, urlInput);
                     downloaderThread.start();
@@ -117,17 +139,20 @@ public class newurl extends Activity {
                     sendFile(getNewestFileInDirectory().getName());
                     NavUtils.navigateUpFromSameTask(newurl.this);
                 }
+
+                //if it's a CSV file:
+                //-download file
+                //-do mapping
+                //write KML file
+                //-send to Liquid Galaxy
+                //-add to the library
                 else if(ext.equalsIgnoreCase("csv")){
-
-
                     RadioGroup rg = (RadioGroup) findViewById(R.id.radioName);
                     RadioGroup rgCoords = (RadioGroup) findViewById(R.id.radioCoords);
                     TextView desc = (TextView) findViewById(R.id.description);
                     TextView tilte = (TextView) findViewById(R.id.title);
-
                     //read csv document and name mapping
                     if(step==0){
-
                         //creates a thread that downloads the file
                         //the main thread waits with .join()
                         downloaderThread = new DownloaderThread(thisActivity, urlInput);
@@ -137,7 +162,6 @@ public class newurl extends Activity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
                         csvFile.setCsvReader(getNewestFileInDirectory().getName());
                         //gets the first row from csv so users can select fields
                         ArrayList<String> line=csvFile.getLine(0);
@@ -215,7 +239,6 @@ public class newurl extends Activity {
                             step=10;
                             next.setText(R.string.Finish);
                         }
-
                     }
                     //read the csv file and create the kml file
                     else if (step==10){
@@ -249,10 +272,14 @@ public class newurl extends Activity {
                         bank.addDataSource(getNewestFileInDirectory().getName(),urlInput,getNewestFileInDirectory().getAbsolutePath());
                         sendFile(getNewestFileInDirectory().getName());
                         NavUtils.navigateUpFromSameTask(newurl.this);
-
                     }
-
                 }
+
+                //if it's a KMZ file:
+                //-download file
+                //-unpack
+                //-send to Liquid Galaxy
+                //-add to the library
                 else if(ext.equalsIgnoreCase("kmz")){
                     //creates a thread that downloads the file
                     //the main thread waits with .join()
@@ -277,7 +304,9 @@ public class newurl extends Activity {
         });
     }
 
+    //Sends the file to Liquid Galaxy
     public void sendFile(final String localFile){
+        //get connection params
         File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
         if (file.exists()){
             FileInputStream inputStream=null;
@@ -294,13 +323,21 @@ public class newurl extends Activity {
             }
         }
 
+        //connection thread
         new Thread(new Runnable() {
             public void run() {
 
-                String text="hola";
+                String text="";
                 try {
                     BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/"+localFile));
                     //reads the file's content
+
+                    String username = params[0];
+                    String password = params[1];
+                    String ipaddress = params[2];
+                    String kmlsfolder = params[6];
+
+                    //file is stored as a string
                     try {
                         StringBuilder sb = new StringBuilder();
                         String line = br.readLine();
@@ -314,12 +351,10 @@ public class newurl extends Activity {
                         br.close();
                     }
                     //sends the file's content
-                    executeRemoteCommand(params[0], params[1], params[2], 22, "echo '"+text+"' > /var/www/kml/"+localFile);     //Sends 'localfile' to the server
+                    executeRemoteCommand(username, password, ipaddress, 22, "echo '"+text+"' > "+kmlsfolder+localFile);     //Sends 'localfile' to the server
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    TextView tv1 = (TextView) findViewById(R.id.textView);
-                    tv1.append("exeption: "+e.getMessage()); //here the app would crash since can't print from the thread
                 }
             }
         }).start();

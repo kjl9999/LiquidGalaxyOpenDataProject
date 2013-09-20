@@ -46,33 +46,44 @@ import android.util.Log;
 
 import com.jcraft.jsch.*;
 
+
+/*
+this is the apps main screen
+user is shown a list of all data files
+on click a connection is opened
+then the file to be shown is written on kmls.txt on the Liquid Galaxy
+and the geo-location of the data is written on query.txt
+ */
 public class MainActivity extends Activity {
 
     private final String TAG = "MainActivity";
-    String[] params;
-    dataBank DB = new dataBank();
-    ArrayList<dataSource> DBsources = DB.getDataSources();
-    int listPosition;
+    String[] params;                                        //conection params
+    dataBank DB = new dataBank();                           //class containing all data
+    ArrayList<dataSource> DBsources = DB.getDataSources();  //list of data files
+    int listPosition;                                       //int indicating the last file the user has selected
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Load the list of files to the listview
         final ListView DSlist = (ListView) findViewById(R.id.datalist);
         final ArrayAdapter<String> listAdapter ;
         listAdapter = new ArrayAdapter<String>(this, R.layout.listlayout);
         for(int i = 0; i<DBsources.size(); i++){
             listAdapter.add(DBsources.get(i).getName());
         }
-
         DSlist.setAdapter(listAdapter);
 
+        //Set the click listener
         DSlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-                File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
                 listPosition=position;
 
+                //gets the connection params from configuration file
+                //This part may be moved earlier to optimize speed by preloading
+                File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
                 if (file.exists()){
                     FileInputStream inputStream=null;
                     try {
@@ -80,7 +91,6 @@ public class MainActivity extends Activity {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     try {
                         params = reader.readLine().split(";");
@@ -89,48 +99,33 @@ public class MainActivity extends Activity {
                     }
                 }
 
+                //connection thread
+                //opens a SSH conection with JSch
+                //and sends the commands to the Liquid Galaxy
+                //to show the clicked data file
+                //and to fly there
                 new Thread(new Runnable() {
                     public void run() {
-                        //gets the file content as a string
-                        String text="";
                         try {
-                            BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/educacio_primaria.kml"));
-                            try {
-                                StringBuilder sb = new StringBuilder();
-                                String line = br.readLine();
-
-                                while (line != null) {
-                                    sb.append(line);
-                                    sb.append('\n');
-                                    line = br.readLine();
-                                }
-                                text = sb.toString();
-                            } finally {
-                                br.close();
-                            }
-                        //links the file to the master kml
-                        //and
                             String username = params[0];
                             String password = params[1];
                             String ipaddress = params[2];
-                            //ssh key not used here?
                             String query = params[4];
                             String kmlstxt = params[5];
-                            String kmlsfolder = params[6];
                             String serverURL =params[7];
                             String filename = DBsources.get(listPosition).getName();
                             String lat = getLatLong(DBsources.get(listPosition).getName())[1];
                             String lon = getLatLong(DBsources.get(listPosition).getName())[0];
-                            String command = "echo '"+serverURL+filename+"' > /var/www/kmls.txt";
+                            String writeonkmls = "echo '"+serverURL+filename+"' > "+kmlstxt+"";
                             String flyto = "flytoview=<LookAt><longitude>"+lon+"</longitude><latitude>"+lat+"</latitude><altitude>0</altitude><tilt>68.68179673613697</tilt><range>774.4323347622752</range><altitudeMode>relativeToGround</altitudeMode><gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode></LookAt>";
 
-                            executeRemoteCommand(username, password, ipaddress, 22, command);                                             //writes filename url on kmls.txt
+                            //command to write the file on kmls.txt
+                            executeRemoteCommand(username, password, ipaddress, 22, writeonkmls);
+                            //command to write the data position on query.txt
                             executeRemoteCommand(username, password, ipaddress, 22, "echo '"+flyto+"' > "+query+"");
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            TextView tv1 = (TextView) findViewById(R.id.textView);
-                            tv1.append("exeption: "+e.getMessage()); //here the app would crash since can't print from the thread
                         }
                     }
                 }).start();
@@ -138,45 +133,35 @@ public class MainActivity extends Activity {
         });
         showAllData();
 
+        //THIS IS TESTING FUNCTIONALITY
         Button button= (Button) findViewById(R.id.refresh);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //showAllData();
-
                 //testing ssh
-
                 File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
-
                 if (file.exists()){
                     FileInputStream inputStream=null;
-
                     try {
                         inputStream = new FileInputStream(file);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
                     try {
                         params = reader.readLine().split(";");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-
                 new Thread(new Runnable() {
                     public void run() {
-
-
                         String text="";
                         try {
                             executeRemoteCommand(params[0], params[1], params[2], 22, "whoami > test.txt");
                             //executeRemoteCommand(params[0], params[1], params[2], 22, "echo 'hola' > test.txt");        //escriure el kml al /var/www/kml/kmls.txt
                             //executeRemoteCommand(params[0], params[1], params[2], 22, "echo 'search=pobla de segur' > /tmp/query.txt");       //escriure la localització a query.txt
-
                         } catch (Exception e) {
                             e.printStackTrace();
                             TextView tv1 = (TextView) findViewById(R.id.textView);
@@ -184,15 +169,12 @@ public class MainActivity extends Activity {
                         }
                     }
                 }).start();
-                //end testing ssh
-
-
-                //generating keys is no longer used
-
             }
         });
-        //
+        //END OF TESTING FUN
     }
+
+    //Returns the latitude and longitude of the first placemark on a file as a String[]
     private String[] getLatLong(String name){
         ArrayList<dataSource> dataFiles = DB.getDataSources();
         String[] coords = new String[2];
@@ -210,69 +192,7 @@ public class MainActivity extends Activity {
         return coords;
     }
 
-    private String getCoordinates(String name) {
-        ArrayList<dataSource> dataFiles = DB.getDataSources();
-        String coords = "";
-        for(int i = 0; i<dataFiles.size(); i++){
-            if (dataFiles.get(i).getName().equalsIgnoreCase(name)){
-                //gets the first coord from the file
-                File kmlfile = new File(Environment.getExternalStorageDirectory()+"/LGOD/"+name);
-                NavigationDataSet kmldata;
-                kmldata=getDataset(kmlfile);
-                coords=kmldata.getPlacemarks().get(0).getCoordinates();
-                return coords;
-            }
-        }
-        return "0,0";
-    }
-
-    public void sendFile(final String localFile){
-        File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
-        if (file.exists()){
-            FileInputStream inputStream=null;
-            try {
-                inputStream = new FileInputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            try {
-                params = reader.readLine().split(";");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        new Thread(new Runnable() {
-            public void run() {
-
-                String text="hola";
-                try {
-                    BufferedReader br = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/LGOD/"+localFile));
-                    //reads the file's content
-                    try {
-                        StringBuilder sb = new StringBuilder();
-                        String line = br.readLine();
-                        while (line != null) {
-                            sb.append(line);
-                            sb.append('\n');
-                            line = br.readLine();
-                        }
-                        text = sb.toString();
-                    } finally {
-                        br.close();
-                    }
-                    //sends the file's content
-                    executeRemoteCommand(params[0], params[1], params[2], 22, "echo '"+text+"' > /home/lg/"+localFile);  //dynamic version (port still hardcoded to 22)
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    TextView tv1 = (TextView) findViewById(R.id.textView);
-                    tv1.append("exeption: "+e.getMessage()); //here the app would crash since can't print from the thread
-                }
-            }
-        }).start();
-    }
-
+//Opens a SSH connection and sends a coomand
     public String executeRemoteCommand(
             final String username,
             final String password,
@@ -281,27 +201,20 @@ public class MainActivity extends Activity {
             final String command) throws Exception {
 
         JSch jsch = new JSch();
-        String privateKey = Environment.getExternalStorageDirectory()+"/LGOD/conf/lg-id_rsa";
+        String privateKey = Environment.getExternalStorageDirectory()+"/LGOD/conf/lg-id_rsa";   //now hardcoded, data from configuration file needs to be used
         jsch.addIdentity(privateKey);
-
         Session session = jsch.getSession(username, hostname, port);
         session.setPassword(password);
-
-
-        // Avoid asking for key confirmation
         Properties prop = new Properties();
         prop.put("StrictHostKeyChecking", "no");
         session.setConfig(prop);
-
         session.connect();
 
-        // SSH Channel
         ChannelExec channelssh = (ChannelExec)
-                session.openChannel("exec");
+        session.openChannel("exec");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         channelssh.setOutputStream(baos);
 
-        // Execute command
         channelssh.setCommand(command);
         channelssh.connect();
         channelssh.disconnect();
@@ -309,43 +222,8 @@ public class MainActivity extends Activity {
         return baos.toString();
     }
 
-public void generateKeys(){
-
-    TextView tv = (TextView)findViewById(R.id.textView);
-
-    String _type="rsa";
-    int type=0;
-    if(_type.equals("rsa")){type=KeyPair.RSA;}
-    else if(_type.equals("dsa")){type=KeyPair.DSA;}
-    else {
-        System.err.println(
-                "usage: java KeyGen rsa output_keyfile comment\n"+
-                        "       java KeyGen dsa  output_keyfile comment");
-        System.exit(-1);
-    }
-    String filename=Environment.getExternalStorageDirectory()+"/LGOD/conf/lg-id_rsa";
-    String comment="Liquid Galaxy";
-    JSch jsch=new JSch();
-
-
-    String passphrase="";
-
-    try{
-        KeyPair kpair=KeyPair.genKeyPair(jsch, type,4096);
-        kpair.setPassphrase(passphrase);
-
-        kpair.writePrivateKey(filename);
-        kpair.writePublicKey(filename+".pub", comment);
-        System.out.println("Finger print: "+kpair.getFingerPrint());
-                tv.append("Finger print: "+kpair.getFingerPrint());
-        kpair.dispose();
-    }
-    catch(Exception e){
-        System.out.println(e);
-        tv.append("exeption: "+e.getMessage());
-    }
-}
-
+    //TESTING FUNCTION
+    // loads data froma all files added to the app on a textview
     public void showAllData(){
         //for each file in /LGOD/ do getDataset and append to a expandable list
         File dir = new File(Environment.getExternalStorageDirectory()+"/LGOD/");
@@ -374,42 +252,33 @@ private String getFileExtension(String urlInput) {
     }
     return extension;
 }
-
+    //Returns the content of a kml file as objects that can be handled
     public NavigationDataSet getDataset(File kmlfile){
         //returns a NavigationDataSet containing all the placemarks from the given kml file
         NavigationDataSet navigationDataSet = null;
         try
         {
-                /* Get a SAXParser from the SAXPArserFactory. */
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SAXParser sp = spf.newSAXParser();
 
-                /* Get the XMLReader of the SAXParser we created. */
             XMLReader xr = sp.getXMLReader();
 
-                /* Create a new ContentHandler and apply it to the XML-Reader*/
             NavigationSaxHandler navSax2Handler = new NavigationSaxHandler();
             xr.setContentHandler(navSax2Handler);
-
-                /* Parse the xml-data from our URL. */
 
             InputStream inputStream= new FileInputStream(kmlfile);
             Reader reader = new InputStreamReader(inputStream,"UTF-8");
 
             InputSource is = new InputSource(reader);
 
-            //is.setEncoding("UTF-8");
             xr.parse(is);
 
-            /* Our NavigationSaxHandler now provides the parsed data to us. */
             navigationDataSet = navSax2Handler.getParsedData();
 
         } catch (Exception e) {
             navigationDataSet = null;
         }
-        //return navigationDataSet;
         return navigationDataSet;
-
     }
 
     @Override

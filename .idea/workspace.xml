@@ -82,85 +82,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="0" selection-start="5182" selection-end="5182" vertical-scroll-proportion="0.6495017" vertical-offset="952" max-vertical-offset="6630">
-              <folding />
+            <state line="53" column="9" selection-start="1304" selection-end="1537" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4573">
+              <folding>
+                <element signature="e#2630#5613#0" expanded="true" />
+                <element signature="e#3943#5579#0" expanded="true" />
+                <element signature="e#5560#5561#0" expanded="true" />
+                <element signature="e#5602#5603#0" expanded="true" />
+                <element signature="e#5774#7683#0" expanded="true" />
+                <element signature="e#6691#7649#0" expanded="true" />
+                <element signature="e#7630#7631#0" expanded="true" />
+                <element signature="e#7672#7673#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConnectionActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ConnectionActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ConnectionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="121" column="64" selection-start="5079" selection-end="5079" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="2890">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_connection.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_connection.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state line="220" column="50" selection-start="10268" selection-end="10268" vertical-scroll-proportion="0.0" vertical-offset="3723" max-vertical-offset="4301">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="42" selection-start="3369" selection-end="3369" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1105">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataSource.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/dataSource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="70" selection-start="839" selection-end="839" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="867">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScriptsActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ScriptsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="49" selection-start="3980" selection-end="3984" vertical-scroll-proportion="0.0" vertical-offset="1870" max-vertical-offset="3519">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newurl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/newurl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="8" selection-start="2789" selection-end="2789" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="12512">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataBank.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/dataBank.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="9" selection-start="808" selection-end="1941" vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1938">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Placemark.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/Placemark.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="18" selection-start="514" selection-end="514" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="748">
+            <state line="189" column="1" selection-start="7777" selection-end="7777" vertical-scroll-proportion="2.1609757" vertical-offset="1408" max-vertical-offset="2839">
               <folding />
             </state>
           </provider>
@@ -213,7 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/build.gradle" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/csvmappinglayout.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/newurl.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/XMLBeautifier.java" />
@@ -224,11 +166,12 @@
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/scripts_main.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ScriptsActivity.java" />
-        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/newurl.java" />
-        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_connection.xml" />
-        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ConnectionActivity.java" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ConnectionActivity.java" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ManageDataActivity.java" />
+        <option value="$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/newurl.java" />
       </list>
     </option>
   </component>
@@ -288,6 +231,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -500,8 +445,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -521,11 +464,11 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus4" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -726,21 +669,21 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.083561644" sideWeight="0.7747748" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.6082192" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24967825" sideWeight="0.7986301" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14607465" sideWeight="0.8780822" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12191781" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23552124" sideWeight="0.8780822" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12191781" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1891892" sideWeight="0.6178082" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32857144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -805,26 +748,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/listlayout.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/scripts_main.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -842,23 +765,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ScriptsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="49" selection-start="3980" selection-end="3984" vertical-scroll-proportion="0.0" vertical-offset="1836" max-vertical-offset="3451">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/csv.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="43" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1938">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/NavigationDataSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="148" selection-end="148" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
           <folding />
         </state>
       </provider>
@@ -877,13 +786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/newurl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="8" selection-start="2789" selection-end="2789" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="12512">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/Placemark.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="18" selection-start="514" selection-end="514" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="748">
@@ -898,10 +800,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ScriptsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="42" selection-start="3369" selection-end="3369" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1105">
+        <state line="111" column="49" selection-start="3980" selection-end="3984" vertical-scroll-proportion="0.027642276" vertical-offset="1394" max-vertical-offset="3009">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/layout/managedata_main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/NavigationDataSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="148" selection-end="148" vertical-scroll-proportion="0.22113821" vertical-offset="0" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="9" selection-start="1304" selection-end="1537" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4573">
+          <folding>
+            <element signature="e#2630#5613#0" expanded="true" />
+            <element signature="e#3943#5579#0" expanded="true" />
+            <element signature="e#5560#5561#0" expanded="true" />
+            <element signature="e#5602#5603#0" expanded="true" />
+            <element signature="e#5774#7683#0" expanded="true" />
+            <element signature="e#6691#7649#0" expanded="true" />
+            <element signature="e#7630#7631#0" expanded="true" />
+            <element signature="e#7672#7673#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -910,21 +845,64 @@
         <state />
       </provider>
       <provider editor-type-id="text-editor">
-        <state line="220" column="50" selection-start="10268" selection-end="10268" vertical-scroll-proportion="0.0" vertical-offset="3723" max-vertical-offset="4301">
+        <state line="222" column="50" selection-start="10471" selection-end="10471" vertical-scroll-proportion="0.0" vertical-offset="3757" max-vertical-offset="4335">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="42" selection-start="3421" selection-end="3421" vertical-scroll-proportion="0.88455284" vertical-offset="425" max-vertical-offset="1122">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ManageDataActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="401" selection-end="401" vertical-scroll-proportion="0.33170733" vertical-offset="0" max-vertical-offset="1088">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/newurl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="362" column="22" selection-start="16546" selection-end="16546" vertical-scroll-proportion="-8.229236" vertical-offset="10394" max-vertical-offset="13311">
+          <folding>
+            <element signature="e#3762#3943#0" expanded="true" />
+            <element signature="e#3932#3933#0" expanded="true" />
+            <element signature="e#4152#14326#0" expanded="true" />
+            <element signature="e#7984#8007#0" expanded="true" />
+            <element signature="e#8048#8061#0" expanded="true" />
+            <element signature="e#8467#8494#0" expanded="true" />
+            <element signature="e#8535#8553#0" expanded="true" />
+            <element signature="e#8719#8740#0" expanded="true" />
+            <element signature="e#8938#8961#0" expanded="true" />
+            <element signature="e#9577#9602#0" expanded="true" />
+            <element signature="e#9647#9662#0" expanded="true" />
+            <element signature="e#9826#9841#0" expanded="true" />
+            <element signature="e#9997#10022#0" expanded="true" />
+            <element signature="e#10067#10082#0" expanded="true" />
+            <element signature="e#10311#10336#0" expanded="true" />
+            <element signature="e#10381#10396#0" expanded="true" />
+            <element signature="e#10477#10492#0" expanded="true" />
+            <element signature="e#14315#14316#0" expanded="true" />
+            <element signature="e#15118#16477#0" expanded="true" />
+            <element signature="e#16466#16467#0" expanded="true" />
+            <element signature="e#26196#33558#0" expanded="true" />
+            <element signature="e#28028#28093#0" expanded="true" />
+            <element signature="e#28134#28208#0" expanded="true" />
+            <element signature="e#30177#30243#0" expanded="true" />
+            <element signature="e#30284#30359#0" expanded="true" />
+            <element signature="e#31695#31745#0" expanded="true" />
+            <element signature="e#32435#32485#0" expanded="true" />
+            <element signature="e#33551#33552#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/ConnectionActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="64" selection-start="5079" selection-end="5079" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="2890">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LiquidGalaxyOpenData/src/main/java/com/kjl/liquidgalaxyopendata/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="0" selection-start="5182" selection-end="5182" vertical-scroll-proportion="0.6495017" vertical-offset="952" max-vertical-offset="6630">
+        <state line="189" column="1" selection-start="7777" selection-end="7777" vertical-scroll-proportion="2.1609757" vertical-offset="1408" max-vertical-offset="2839">
           <folding />
         </state>
       </provider>

@@ -55,5 +55,6 @@
     <string name="kmlstxt">kmls.txt path:</string>
     <string name="kmlsfolder">kmls folder path:</string>
     <string name="kmlurl">kmls server url:</string>
+    <string name="title_activity_manage_data">Manage Data</string>
 
 </resources>

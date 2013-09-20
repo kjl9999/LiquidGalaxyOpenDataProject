@@ -24,8 +24,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-
-
+/*
+this is the apps connection configuration screen
+a form is shown so the user can input the params needed to connect to a Liquid Galaxy instalation
+these params are stored on a file
+on later uses th form is filled with the data from the file
+ */
 
 public class ConnectionActivity extends Activity {
 
@@ -33,10 +37,9 @@ public class ConnectionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connection);
-        // Show the Up button in the action bar.
         setupActionBar();
 
-        //getting stored connection info
+        //The form is filled with the data from the file
         EditText user = (EditText) findViewById(R.id.useret);
         EditText pwd = (EditText) findViewById(R.id.pwdet);
         EditText ip = (EditText) findViewById(R.id.ipet);
@@ -47,18 +50,14 @@ public class ConnectionActivity extends Activity {
         EditText kmlsurl = (EditText) findViewById(R.id.kmlsurlet);
 
         File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
-
         if (file.exists()){
             FileInputStream inputStream=null;
-
             try {
                 inputStream = new FileInputStream(file);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
             try {
                 String line = reader.readLine();
                 String[] params = line.split(";");
@@ -75,6 +74,7 @@ public class ConnectionActivity extends Activity {
             }
         }
 
+        //data from the form is saved to file when save button is clicked
         Button savebutton = (Button) findViewById(R.id.BtnNext);
         savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,11 +106,9 @@ public class ConnectionActivity extends Activity {
                         File file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/");
                         file.mkdirs();
                         file = new File(Environment.getExternalStorageDirectory()+"/LGOD/conf/connection.conf");
-
                         if (!file.exists()) {
                             file.createNewFile();
                         }
-
                         FileWriter fw = new FileWriter(file.getAbsoluteFile());
                         BufferedWriter bw = new BufferedWriter(fw);
                         bw.write(user.getText().toString() + ";"
@@ -122,7 +120,6 @@ public class ConnectionActivity extends Activity {
                                 + kmls.getText().toString() + ";"
                                 + kmlsurl.getText().toString()); //user;pwd;ip
                         bw.close();
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -141,6 +138,7 @@ public class ConnectionActivity extends Activity {
 
     }
 
+    //checks if the introduced IP address matches correct format
     public static boolean validIP(String ip) {
         if (ip == null || ip.isEmpty()) return false;
         ip = ip.trim();
